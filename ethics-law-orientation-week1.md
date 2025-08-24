@@ -16,9 +16,8 @@ Using the lab means you agree to limited monitoring, like logging login times, n
 Any violations should be reported to the IT Office. Breaking this policy can lead to losing lab access, being referred to Student Conduct, or facing disciplinary or legal action.  
 
 ## Evidence Links
-- [Week 1 Reflection (PDF)](link-to-your-reflection)
-- [Policy Snippet (Docx/PDF)](link-to-your-aup-file)
-- [Notes Diagram or Summary (optional)](link-here)  
+- [Week 1 Reflection (PDF)](https://github.com/claytonholden/claytonholden.github.io/blob/main/CYBR2100_Reflection_W01_HoldenClayton.pdf)
+- [Policy Snippet (PDF)](https://github.com/claytonholden/claytonholden.github.io/blob/main/CYBR2100_AUP_W01_HoldenClayton.pdf)
 
 ## Reflection
 Looking back, I’d like to refine my policy snippet by making it even shorter and more user-friendly, since AUPs should be easy for students to understand quickly. Another area I could expand on is being more specific about data retention and appeals. The main stakeholders here are students, instructors, and IT staff. A clear policy protects students from crossing legal or ethical lines by mistake, while giving IT staff the authority and documentation they need to enforce rules fairly.  
