@@ -7,14 +7,13 @@ The ethical framework that fits me best is Consequences (utilitarianism). I like
 Authorization means having clear, documented permission from the system owner with defined scope, timeframe, and methods. For example, a student who wants to test a lab network tool must get written approval from IT Security or their instructor instead of relying on a friend’s or professor’s verbal okay.  
 
 ## Policy Snippet
-This policy applies to anyone using the computers or network in Lab John Light 357. The lab is here for schoolwork like class assignments, research, and instructor-approved projects. To do anything beyond normal use, you need clear, written authorization. Students are expected to keep their login credentials safe and only use the systems and resources they are assigned.  
+Hocking College Lab Internet Acceptable Use Policy applies to everyone who uses the computers or network in Lab John Light 357. The lab is intended for school assignments, research, and approved projects only. To utilize the lab for any other than standard use, you need clear, written authorization.
 
-Students may not run network scans, capture traffic, guess passwords, or do any other type of security testing unless it is part of a class assignment or approved in writing by IT. Installing unauthorized software, getting into accounts or files without permission, sharing or bypassing logins, or trying to spread harmful code is not allowed.  
+Students should not run network scans, capture traffic, guess passwords, or any other security testing without written permission from IT. Downloading unapproved software, accessing files or accounts without permission, sharing or bypassing logins, or trying to disperse malicious code is prohibited.
 
-Using the lab means you agree to limited monitoring, like logging login times, network activity, or file access. Logs are only kept as long as needed for security and can only be reviewed by authorized staff.  
+By accessing the lab, you agree to limited monitoring, i.e., log in times, network traffic, or file access. Logs are kept for as short period (7 Days) for security purposes and only by authorized staff.
 
-Any violations should be reported to the IT Office. Breaking this policy can lead to losing lab access, being referred to Student Conduct, or facing disciplinary or legal action.  
-
+Any infractions should be reported to the IT Office. Breaking this policy could lead to loss of lab privileges, referral to Student Conduct, or legal action.
 ## Evidence Links
 - [Week 1 Reflection (PDF)](https://github.com/claytonholden/claytonholden.github.io/blob/main/CYBR2100_Reflection_W01_HoldenClayton.pdf)
 - [Policy Snippet (PDF)](https://github.com/claytonholden/claytonholden.github.io/blob/main/CYBR2100_AUP_W01_HoldenClayton.pdf)
