@@ -1,10 +1,10 @@
 # Ethics & Law Orientation (Week 1)
 
 ## My Ethical Lens
-The ethical framework that fits me best is **Consequences (utilitarianism)**. I like this lens because it focuses on doing the most good and minimizing harm, which feels practical for real security work. At the same time, I know utilitarianism has flaws, so I also lean on **Virtue and Care**, since I try to act honestly and think about how my choices affect relationships and trust.  
+The ethical framework that fits me best is Consequences (utilitarianism). I like this lens because it focuses on doing the most good and minimizing harm, which feels practical for real security work. At the same time, I know utilitarianism has flaws, so I also lean on Virtue and Care, since I try to act honestly and think about how my choices affect relationships and trust.  
 
 ## Authorization Principle
-**Authorization** means having clear, documented permission from the system owner with defined scope, timeframe, and methods. For example, a student who wants to test a lab network tool must get written approval from IT Security or their instructor instead of relying on a friend’s or professor’s verbal okay.  
+Authorization means having clear, documented permission from the system owner with defined scope, timeframe, and methods. For example, a student who wants to test a lab network tool must get written approval from IT Security or their instructor instead of relying on a friend’s or professor’s verbal okay.  
 
 ## Policy Snippet
 This policy applies to anyone using the computers or network in Lab John Light 357. The lab is here for schoolwork like class assignments, research, and instructor-approved projects. To do anything beyond normal use, you need clear, written authorization. Students are expected to keep their login credentials safe and only use the systems and resources they are assigned.  
