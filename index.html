@@ -145,7 +145,7 @@
 
     <section class="hero">
       <h1>Ethics & Law in Cybersecurity — Coursework & Artifacts</h1>
-      <p>Notes, policy snippets, and reflections from CYBR2100. Built for clarity. No fluff.</p>
+      <p>Notes, policy snippets, and reflections from CYBR2100.</p>
       <div class="chips">
         <span class="chip">Hocking College</span>
         <span class="chip">Fall 2025</span>
@@ -154,3 +154,69 @@
     </section>
 
     <!-- Quick filter -->
+    <input id="filter" class="filter" placeholder="Filter by tag or title…" aria-label="Filter posts">
+
+    <section id="posts" class="grid">
+      <!-- POST CARD: Week 1 -->
+      <article class="card">
+        <div class="meta">Week 1 • Aug 23, 2025</div>
+        <h3>Ethics & Law Orientation</h3>
+        <p>My ethical lens (Consequences + Virtue/Care), authorization principle, and a lab AUP snippet for JL357.</p>
+        <div class="tags">
+          <span class="tag">authorization</span>
+          <span class="tag">privacy</span>
+          <span class="tag">CFAA</span>
+        </div>
+        <a class="btn" href="/ethics-law-orientation-week1">Open Page</a>
+      </article>
+
+      <!-- POST CARD: Week 2 -->
+      <article class="card">
+        <div class="meta">Week 2 • Aug 30, 2025</div>
+        <h3>Privacy by Design: Monitoring Policy</h3>
+        <p>Summary of privacy principles (data minimization + proportionality), my Monitoring & Retention clause, and reflection on impacts.</p>
+        <div class="tags">
+          <span class="tag">privacy</span>
+          <span class="tag">monitoring</span>
+          <span class="tag">retention</span>
+        </div>
+        <a class="btn" href="/privacy-by-design-week2">Open Page</a>
+      </article>
+
+      <!-- Template for future weeks (copy/paste)
+      <article class="card">
+        <div class="meta">Week X • MMM DD, 2025</div>
+        <h3>Post Title Goes Here</h3>
+        <p>1–2 line summary of what’s inside. Keep it tight and scannable.</p>
+        <div class="tags">
+          <span class="tag">tag1</span><span class="tag">tag2</span>
+        </div>
+        <a class="btn" href="/your-weekX-url">Open Page</a>
+      </article>
+      -->
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> Clayton Holden • Built with GitHub Pages</div>
+      <div id="lu"></div>
+    </footer>
+  </div>
+
+  <script>
+    // Footer year + last updated
+    document.getElementById('y').textContent = new Date().getFullYear();
+    document.getElementById('lu').textContent = "Last updated: " + new Date(document.lastModified).toLocaleString();
+
+    // Simple filter for cards
+    const input = document.getElementById('filter');
+    const cards = [...document.querySelectorAll('.card')];
+    input.addEventListener('input', e=>{
+      const q = e.target.value.toLowerCase();
+      cards.forEach(c=>{
+        const text = c.innerText.toLowerCase();
+        c.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
