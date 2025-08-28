@@ -14,8 +14,8 @@ The college collects only the minimum data needed for security and support. Acce
 This clause uses the principles of data minimization and proportionality to make sure monitoring protects systems without going overboard. It also includes notice and consent so users know what is being collected and why. These ideas connect to the ACM Code of Ethics section 1.6, “Respect privacy,” which says professionals have a duty to handle personal data carefully and only collect what is necessary.  
 
 ## Evidence Links
-- [Week 2 Reflection (PDF)](https://github.com/claytonholden/claytonholden.github.io/blob/main/CYBR2100_Reflection_W02_HoldenClayton.pdf)
-- [Monitoring & Retention Clause (PDF)](https://github.com/claytonholden/claytonholden.github.io/blob/main/CYBR2100_Monitoring_Retention_W02_HoldenClayton.pdf)
+<a href="/files/CYBR2100_Reflection_W02_HoldenClayton.pdf" target="_blank" rel="noopener">Week 2 Reflection (PDF)</a>  
+<a href="/files/CYBR2100_Monitoring_Retention_W02_HoldenClayton.pdf" target="_blank" rel="noopener">Monitoring & Retention Clause (PDF)</a>
 
 ## Reflection
 If I refined this clause further, I would make the retention period even clearer and add more detail about the appeals process. I also think the language could be simplified so students understand it quickly. The stakeholders here are students, IT staff, and the college itself. A clear and balanced monitoring policy protects student trust while still giving IT staff what they need to keep systems safe. 
