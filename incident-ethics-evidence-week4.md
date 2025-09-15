@@ -1,4 +1,6 @@
-# Incident Ethics & Evidence Notes (Week 4)
+---
+title: Incident Ethics & Evidence Notes (Week 4)
+---
 
 ## My First-Hour Priorities
 - Capture one suspicious email (.eml) with full headers and body, because it shows the entry vector and indicators of compromise.  
