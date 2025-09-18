@@ -41,8 +41,8 @@
 Evidence is hashed with SHA-256 at collection time and logged in the chain of custody. All artifacts are stored in a restricted evidence directory with IR-team-only access. Logs are reviewed for redaction to remove any mock student or personal data before sharing. Retention is limited to 14 days unless extended by written approval, after which secure deletion is confirmed.  
 
 ## Evidence Links
-- [Week 5 ROE Outline (PDF)](/CYBR2100_ROE_Outline_W05_HoldenClayton.pdf)  
-- [Week 5 Reflection (PDF)](/CYBR2100_Reflection_W05_HoldenClayton.pdf)  
+- [Week 5 ROE Outline (PDF)](/files/CYBR2100_ROE_Outline_W05_HoldenClayton.pdf)  
+- [Week 5 Reflection (PDF)](/files/CYBR2100_Reflection_W05_HoldenClayton.pdf)  
 
 ## Reflection
 Next time I would make the escalation and stop-test conditions even clearer, with more concrete examples to remove judgment calls. I would also add more detail on who enforces the ROE if someone violates the terms. The main stakeholders are the testers, the instructor, and IT Security. Clear rules help keep trust while making sure testing is useful but safe.  
