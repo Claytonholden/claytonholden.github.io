@@ -50,8 +50,8 @@
 I used SHA-256 hashing to prove the integrity of each artifact and logged chain-of-custody entries as evidence was collected. All artifacts were stored in a restricted `/evidence/HC-IR-1066` directory with access limited to the IR team. Redactions were applied to the IdP log to remove unrelated users, and no credentials or tokens were included in the notes. This ensures the evidence is defensible, accurate, and respectful of privacy.  
 
 ## Evidence Links
-- [Incident & Evidence Note (PDF)](/CYBR2100_IncidentNote_W04_HoldenClayton.pdf)  
-- [Week 4 Reflection (PDF)](/CYBR2100_Reflection_W04_HoldenClayton.pdf)  
+- [Incident & Evidence Note (PDF)](/files/CYBR2100_IncidentNote_W04_HoldenClayton.pdf)  
+- [Week 4 Reflection (PDF)](/files/CYBR2100_Reflection_W04_HoldenClayton.pdf)  
 
 ## Reflection
 If I did this exercise again, I would make my containment recommendation more detailed and tie it to specific playbooks for phishing. I would also add a clearer escalation path for when scope needs to expand. The main stakeholders are the affected user, IT/IR staff, and the email administration team. Clearer notes and containment actions help those groups move quickly while protecting user privacy.  
