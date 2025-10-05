@@ -41,10 +41,12 @@ This addendum follows the bioethics principles from **Chapter 12** of *Ethics in
 
 ---
 
-## Evidence Links  
-- Weber, E. (2024). *Ethics in Technology*, Chapters 12–13.  
-- Neuralink Clinical Trial Update (2024). [Reuters](https://www.reuters.com/technology/elon-musks-neuralink-gets-approval-human-trial-2024-02-01/)  
-- U.S. Food and Drug Administration (FDA). (2023). [Brain–Computer Interface Guidance for Investigational Device Exemptions](https://www.fda.gov/media/173253/download)  
+## Evidence Links
+- NIH BRAIN Initiative — **Neuroethics overview** (ethical and societal issues for BCIs). https://braininitiative.nih.gov/research/neuroethics
+- FDA Guidance — **Implanted BCI devices: non-clinical testing considerations**. https://www.fda.gov/regulatory-information/search-fda-guidance-documents/implanted-brain-computer-interface-bci-devices-patients-paralysis-or-amputation-non-clinical-testing
+- FDA/NIH Joint Workshop (2024) — **Clinical outcome assessments for implanted BCIs**. https://www.fda.gov/news-events/fda-meetings-conferences-and-workshops/public-workshop-food-and-drug-administrationnational-institutes-health-joint-workshop-developing
+- WIRED (Feb 2024) — **Neuralink first human subject demo** (benefits + transparency concerns). https://www.wired.com/story/neuralink-implant-first-human-patient-demonstration
+- The Guardian (May 2024) — **Follow-up on implant complication** (risk/precaution context). https://www.theguardian.com/technology/article/2024/may/09/neuralink-brain-chip-implant
 
 ---
 
