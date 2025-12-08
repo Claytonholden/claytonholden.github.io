@@ -8,11 +8,11 @@ This unit brings SERVER3 up to enterprise security standards using CIS Windows S
 
 ### **Lab 3 — Server Hardening & Baseline Security**  
 Configured password policy, lockout settings, firewall profiles, RDP rule restrictions, and disabled insecure services.  
-[View PDF](Lab3_Hardening.pdf)
+[View PDF](Lab3.pdf)
 
 ### **Lab 4 — Patch Validation & Policy Enforcement**  
 Verified KB installation, configured audit policies, checked Windows Update history, and validated logging.  
-[View PDF](Lab4_Patching.pdf)
+[View PDF](Lab4.pdf)
 
 ---
 
@@ -20,7 +20,7 @@ Verified KB installation, configured audit policies, checked Windows Update hist
 
 ### **Milestone 2 — Security Hardening & Patch Management Report**  
 Full documentation of CIS-level controls, Windows Update validation, firewall rules, and service audit.  
-[View PDF](Milestone2_HardeningPatching.pdf)
+[View PDF](Milestone_2_Security_Hardening_Patch_Management_Report.pdf)
 
 ---
 
