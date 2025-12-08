@@ -143,8 +143,6 @@ In addition to the milestones, I completed six Cisco / Packet Tracer labs coveri
 - Device hardening and login/banner protections  
 - Final review lab tying routing, switching, and security together
 
-(Individual lab PDFs are stored in this folder and can be linked or downloaded as needed.)
-
 ---
 
 ## How This Maps to Real Work
