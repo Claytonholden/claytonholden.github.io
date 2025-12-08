@@ -81,7 +81,7 @@ This milestone demonstrates that I can design and justify a **layered security a
 This milestone proves I can move from **raw packets → detection → actionable recommendations**, which is exactly what a junior SOC analyst or network defender is expected to do.
 
 **Artifact (PDF):**  
-[Milestone 2 – Traffic Analysis Report](Holden_CYBR2102_M2.pdf)
+[Milestone 2 – Traffic Analysis Report](/CCNA-Security/Access-Control-Monitoring/Holden_CYBR2102_M2.pdf)
 
 ---
 
