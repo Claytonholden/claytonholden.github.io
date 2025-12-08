@@ -13,11 +13,11 @@ Labs and milestones in this unit focus on proper architecture and role-based fir
 ## 📘 Labs
 
 ### **Lab 1 — Basic Network ACLs**  
-[Open PDF](CiscoLab1.pdf)
+[Open PDF](CiscoLab1-Holden.pdf)
 
 ### **Lab 2 — Role-Based ACL Enforcement**  
 Includes Admin, IT Support, and User access rules and tests.  
-[Open PDF](CiscoLab2.pdf)
+[Open PDF](CiscoLab2-Holden.pdf)
 
 ---
 
