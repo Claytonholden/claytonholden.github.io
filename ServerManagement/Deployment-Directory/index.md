@@ -1,27 +1,29 @@
-# Unit 1 — Deployment & Directory Services  
-Covers installation of Windows Server, VM configuration, domain controller promotion, and baseline directory setup.
+---
+layout: default
+title: Deployment & Directory Services
+---
 
-This unit establishes the foundation for all later hardening, patching, and automation.
+# Deployment & Directory Services (Unit 1)
+
+This section contains the foundational work of NET-2220: installing Windows Server, promoting it to a domain controller, and creating the initial AD DS structure.
 
 ---
 
-## 📘 Included Work
+## 📘 Labs
 
 ### **Lab 1 — Virual Machine Setup and Deployment**  
 Initial configuration, ISO download, Virtul Box Setup. 
 No PDF avaliable
 
-### **Lab 2 — Identity & Directory Services (AD DS)**  
-Promotion of SERVER3 to `corp.local`, creation of Users & Groups OUs, user `jsmith`, and group `ITAdmins`.  
-[View PDF](Lab2.pdf)
+### **Lab 2 — Identity & Directory Services (AD DS)**
+Promotion of SERVER3 to `corp.local`, creation of Users & Groups OUs, and identity configuration.  
+[View PDF](Lab2_AD_DS.pdf)
 
 ---
 
-## 🧾 Milestone
-
-### **Milestone 1 — Deployment & Directory Configuration Report**  
-Full change-record format covering initial deployment and AD DS configuration.  
-[View PDF](Milestone_1_Clayton_Holden.pdf)
+## 🧾 Milestone 1 — Deployment & Directory Configuration  
+Full change-record documenting the initial server deployment and AD DS configuration.  
+[View PDF](Milestone1_DeploymentDirectory.pdf)
 
 ---
 
@@ -29,6 +31,7 @@ Full change-record format covering initial deployment and AD DS configuration.
 
 - Windows Server installed on VirtualBox  
 - Hostname → SERVER3  
-- Domain creation: `corp.local`  
-- Identity structure established with OUs, users, and groups  
-- Foundation for hardening, patching, and automation  
+- Domain created: **corp.local**  
+- AD DS roles and identity structure built  
+- OUs: Users, Groups  
+- Accounts: `jsmith`, `ITAdmins`  
