@@ -128,7 +128,7 @@ The report walks through the full **NIST SP 800-61** incident lifecycle:
 This milestone ties together **network defense + Windows security + backup** into a coherent **incident response playbook**, showing how I would handle a real brute-force attack from detection through lessons learned.
 
 **Artifact (PDF):**  
-[Milestone 3 – Incident Response Plan](Holden_CYBR2102_M3.pdf)
+[Milestone 3 – Incident Response Plan](/CCNA-Security/Incident-Response/Holden_CYBR2102_M3.pdf)
 
 ---
 
