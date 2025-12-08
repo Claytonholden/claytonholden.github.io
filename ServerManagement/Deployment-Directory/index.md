@@ -21,7 +21,7 @@ Promotion of SERVER3 to `corp.local`, creation of Users & Groups OUs, user `jsmi
 
 ### **Milestone 1 — Deployment & Directory Configuration Report**  
 Full change-record format covering initial deployment and AD DS configuration.  
-[View PDF](Milestone1_DeploymentDirectory.pdf)
+[View PDF](Milestone_1_Clayton_Holden.pdf)
 
 ---
 
