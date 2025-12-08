@@ -7,13 +7,13 @@ This unit establishes the foundation for all later hardening, patching, and auto
 
 ## 📘 Included Work
 
+### **Lab 1 — Virual Machine Setup and Deployment**  
+Initial configuration, ISO download, Virtul Box Setup. 
+No PDF avaliable
+
 ### **Lab 2 — Identity & Directory Services (AD DS)**  
 Promotion of SERVER3 to `corp.local`, creation of Users & Groups OUs, user `jsmith`, and group `ITAdmins`.  
-[View PDF](Lab2_AD_DS.pdf)
-
-### **Lab 3 — Post-Installation Configuration / Baseline Setup**  
-Initial configuration tasks such as name change, password policy prep, networking, firewall prep.  
-[View PDF](Lab3_PostInstall.pdf)
+[View PDF](Lab2.pdf)
 
 ---
 
