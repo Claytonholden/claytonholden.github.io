@@ -1,33 +1,36 @@
-# Unit 2 — Security Hardening & Patch Compliance  
+---
+layout: default
+title: Hardening & Patch Management
+---
 
-This unit brings SERVER3 up to enterprise security standards using CIS Windows Server 2019 Level 1 guidance and validates all installed patches.
+# Security Hardening & Patch Management (Unit 2)
+
+This section documents the application of CIS-aligned policies and full patch validation.
 
 ---
 
 ## 🔒 Labs
 
-### **Lab 3 — Server Hardening & Baseline Security**  
-Configured password policy, lockout settings, firewall profiles, RDP rule restrictions, and disabled insecure services.  
-[View PDF](Lab3.pdf)
+### **Lab 3 — Server Hardening & Baseline Security**
+Covers CIS password policy, lockout, firewall rules, service hardening.  
+[View PDF](Lab3_Hardening.pdf)
 
-### **Lab 4 — Patch Validation & Policy Enforcement**  
-Verified KB installation, configured audit policies, checked Windows Update history, and validated logging.  
-[View PDF](Lab4.pdf)
+### **Lab 4 — Patch Validation & Policy Enforcement**
+Uses PowerShell + Event Viewer to validate current patch level and audit policy configuration.  
+[View PDF](Lab4_Patching.pdf)
 
 ---
 
-## 🧾 Milestone
-
-### **Milestone 2 — Security Hardening & Patch Management Report**  
-Full documentation of CIS-level controls, Windows Update validation, firewall rules, and service audit.  
-[View PDF](Milestone_2_Security_Hardening_Patch_Management_Report.pdf)
+## 🧾 Milestone 2 — Hardening & Patch Management  
+Full CIS-style validation including password/lockout, firewall, disabled services, KB verification, and audit testing.  
+[View PDF](Milestone2_HardeningPatching.pdf)
 
 ---
 
 ## 🧠 Key Outcomes
 
-- CIS password and lockout policy applied  
-- Firewall: all profiles enabled, custom rules enforced  
-- Insecure services disabled (RemoteRegistry, Telnet, Print Spooler)  
-- Advanced audit policy enabled (logon, account management, policy change)  
-- Patch status validated using PowerShell + Event Viewer  
+- Strong password + lockout policies (CIS Level 1)  
+- Hardened inbound firewall rules  
+- Disabled insecure services  
+- Confirmed KB compliance  
+- Enabled advanced audit logging  
