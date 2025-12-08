@@ -47,7 +47,7 @@ By the end of the class I could:
 This milestone demonstrates that I can design and justify a **layered security architecture** instead of relying on a single firewall rule. Each layer (perimeter, network, host, application, data) has a specific control and a test to prove it works.
 
 **Artifact (PDF):**  
-[Milestone 1 — Defense-in-Depth Diagram & Access Policy](/CCNA-Security/Milestone1Defense-in-DepthDiagramAccessPolicyHolden.pdf)
+[Milestone 1 — Defense-in-Depth Diagram & Access Policy](Milestone1Defense-in-DepthDiagramAccessPolicyHolden.pdf)
 
 ---
 
@@ -81,7 +81,7 @@ This milestone demonstrates that I can design and justify a **layered security a
 This milestone proves I can move from **raw packets → detection → actionable recommendations**, which is exactly what a junior SOC analyst or network defender is expected to do.
 
 **Artifact (PDF):**  
-[Milestone 2 – Traffic Analysis Report](/CCNA-Security/Holden_CYBR2102_M2.pdf)
+[Milestone 2 – Traffic Analysis Report](Holden_CYBR2102_M2.pdf)
 
 ---
 
@@ -128,7 +128,7 @@ The report walks through the full **NIST SP 800-61** incident lifecycle:
 This milestone ties together **network defense + Windows security + backup** into a coherent **incident response playbook**, showing how I would handle a real brute-force attack from detection through lessons learned.
 
 **Artifact (PDF):**  
-[Milestone 3 – Incident Response Plan](/CCNA-Security/Holden_CYBR2102_M3.pdf)
+[Milestone 3 – Incident Response Plan](Holden_CYBR2102_M3.pdf)
 
 ---
 
