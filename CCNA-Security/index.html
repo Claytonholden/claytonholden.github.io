@@ -88,24 +88,25 @@
 
     <section class="hero">
       <h1>CCNA Security / Network Defense – Capstone</h1>
-      <p>Defense-in-depth design, traffic analysis, and incident response mapped to NIST and CIS controls.</p>
+      <p>
+        CYBR-2102 focused on building and defending small enterprise networks: designing
+        defense-in-depth, analyzing packet captures, and writing a full incident response plan.
+      </p>
       <div class="chips">
-        <span class="chip">CYBR-2102</span>
-        <span class="chip">CCNA Security</span>
-        <span class="chip">Network Defense Fundamentals</span>
+        <span class="chip">Cisco / Packet Tracer</span>
+        <span class="chip">Wireshark</span>
+        <span class="chip">NIST 800-61</span>
       </div>
     </section>
 
     <h2 class="section-title">Course Outcomes</h2>
-    <p>
-      Over this course I learned to:
-    </p>
+    <p>By the end of the class I could:</p>
     <ul>
       <li>Design segmented networks with external, DMZ, and internal zones.</li>
-      <li>Write and verify Cisco IOS ACLs that enforce least privilege between zones.</li>
-      <li>Capture and analyze traffic in Wireshark (ping sweeps, port scans, DoS-style floods).</li>
-      <li>Document findings in traffic analysis reports linked to CIS / NIST controls.</li>
-      <li>Write an incident response plan for brute-force RDP attacks with exfil attempts.</li>
+      <li>Write and verify Cisco IOS ACLs enforcing least privilege between those zones.</li>
+      <li>Capture and analyze traffic in Wireshark (ping sweeps, SYN scans, DoS-style floods).</li>
+      <li>Map findings to CIS / NIST controls and recommend concrete defensive actions.</li>
+      <li>Write an incident response plan that follows the full NIST SP 800-61 lifecycle.</li>
     </ul>
 
     <h2 class="section-title">Milestones</h2>
@@ -115,14 +116,13 @@
         <div class="meta">Milestone 1</div>
         <h3>Defense-in-Depth Network Design</h3>
         <p>
-          Packet Tracer design with external, DMZ, and internal zones. Firewall ACLs control web access,
-          admin management, and DMZ ↔ internal traffic. Local firewalls and an access-control matrix tie
-          network rules back to user roles.
+          Packet Tracer design with external, firewall, DMZ, and internal zones. ACLs control web
+          access to the DMZ, restrict management to admin hosts, and block direct DMZ ↔ internal
+          traffic. Local firewalls and an access-control matrix tie network rules back to user roles.
         </p>
         <a class="btn" href="/CCNA-Security/Network-Design/Milestone1Defense-in-DepthDiagramAccessPolicyHolden.pdf" target="_blank" rel="noopener">
           Open Milestone 1 PDF
         </a>
-        <!-- Change the href above if your filename is different -->
       </article>
 
       <!-- M2 -->
@@ -131,7 +131,7 @@
         <h3>Traffic Analysis Report (Wireshark)</h3>
         <p>
           Captured live traffic and identified ping sweeps, SYN scans, and high-rate ICMP floods.
-          Used Wireshark filters to confirm attack behavior and recommended defenses mapped to
+          Used Wireshark filters to confirm attacker behavior and mapped countermeasures to
           CIS Controls and NIST guidance.
         </p>
         <a class="btn" href="/CCNA-Security/Access-Control-Monitoring/Holden_CYBR2102_M2.pdf" target="_blank" rel="noopener">
@@ -155,9 +155,21 @@
 
     <h2 class="section-title">Labs & Supporting Work</h2>
     <p>
-      Alongside the milestones I completed six Packet Tracer / IOS labs covering secure device
-      setup, VLANs and inter-VLAN routing, ACLs, VPN/remote access, and device hardening. These show
-      my ability to move from design → configuration → verification on real Cisco-style gear.
+      I also completed a series of Cisco / Packet Tracer labs covering secure device setup,
+      VLANs and inter-VLAN routing, ACLs, VPN/remote access, and device hardening. These labs
+      show that I can move from design → configuration → verification on actual router/switch
+      configurations.
+    </p>
+
+    <h2 class="section-title">Full capstone write-up</h2>
+    <p>
+      For a more detailed, written breakdown of how the milestones fit together, see the
+      Markdown capstone page:
+    </p>
+    <p>
+      <a class="btn" href="/CCNA-Security/index.md">
+        View full CCNA Security capstone (index.md)
+      </a>
     </p>
 
     <footer>
