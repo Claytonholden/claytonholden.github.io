@@ -13,17 +13,17 @@ This module expands into secure remote access and early-stage threat detection.
 
 ### **Lab 3 — Secure SSH Configuration**  
 Configures SSHv2, RSA keys, local accounts, and verifies encrypted transport.  
-[View PDF](CiscoLab3.pdf)
+[View PDF](CiscoLab3_Holden.pdf)
 
 ### **Lab 4 — Network Monitoring & Threat Detection**  
 Wireshark capture of ICMP sweeps, SYN scans, DoS-like anomalies.  
-[View PDF](CiscoLab4.pdf)
+[View PDF](CiscoLab4_Holden.pdf)
 
 ---
 
 ## 🧾 Milestone 2 — Network Traffic Analysis Report  
 Full analysis including alert tables, detection filters, and defensive recommendations.  
-[View PDF](Milestone2_TrafficAnalysis.pdf)
+[View PDF](Holden_CYBR2102_M2.pdf)
 
 ---
 
