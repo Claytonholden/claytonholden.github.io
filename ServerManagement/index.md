@@ -1,3 +1,8 @@
+---
+layout: default
+title: <Page Title>
+---
+
 # NET-2220 — Server Management  
 **Fall 2025 • Instructor: Norma DePriest**  
 **Student: Clayton Holden**
