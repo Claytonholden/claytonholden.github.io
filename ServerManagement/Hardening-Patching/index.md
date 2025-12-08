@@ -1,6 +1,6 @@
 # Unit 2 — Security Hardening & Patch Compliance  
 
-This unit brings SERVER3 up to enterprise security standards using CIS Windows Server 2022 Level 1 guidance and validates all installed patches.
+This unit brings SERVER3 up to enterprise security standards using CIS Windows Server 2019 Level 1 guidance and validates all installed patches.
 
 ---
 
