@@ -12,17 +12,17 @@ This final module applies the NIST SP 800-61 framework to simulated attack scena
 ## 📘 Labs
 
 ### **Lab 5 — Host-Based Security & ACL Tuning**  
-[View PDF](CiscoLab5.pdf)
+[View PDF](CiscoLab5_Holden.pdf)
 
 ### **Lab 6 — Log Monitoring Automation**  
 PowerShell-based automation of Security Log monitoring + Task Scheduler.  
-[View PDF](CiscoLab6.pdf)
+[View PDF](CiscoLab6_Holden.pdf)
 
 ---
 
 ## 🧾 Milestone 3 — Incident Response Plan  
 Complete NIST-based IR report with timeline, containment actions, eradication steps, and lessons learned.  
-[View PDF](Milestone3_IRPlan.pdf)
+[View PDF](Holden_CYBR2102_M3.pdf)
 
 ---
 
