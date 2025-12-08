@@ -41,6 +41,7 @@ By the end of the class I could:
 **What this shows**
 
 This milestone demonstrates that I can design and justify a **layered security architecture** instead of relying on a single firewall rule. Each layer (perimeter, network, host, application, data) has a specific control and a test to prove it works.
+
 [Open PDF](Milestone1Defense-in-DepthDiagramAccessPolicyHolden.pdf)
 
 ---
