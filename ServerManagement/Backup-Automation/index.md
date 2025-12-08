@@ -20,7 +20,7 @@ Created `ServerMonitor.ps1`, generated daily status reports, and scheduled the t
 
 ### **Milestone 3 — Backup and Automation Implementation Report**  
 Enterprise-style documentation of backup configuration, recovery validation, monitoring, and automation results.  
-[View PDF](Milestone 3 – Backup and Automation Implementation Report.pdf)
+[View PDF](Milestone_3_Backup_and_Automation_Implementation_Report.pdf)
 
 ---
 
