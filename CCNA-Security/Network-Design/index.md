@@ -23,7 +23,7 @@ Includes Admin, IT Support, and User access rules and tests.
 
 ## 🧾 Milestone 1 — Defense-in-Depth & Access Policy  
 Packet Tracer diagram, ACL firewall rules, DMZ segmentation, and multilayer control strategy.  
-[View PDF](Milestone1_DefenseInDepth.pdf)
+[View PDF](Milestone1Defense-in-DepthDiagramAccessPolicyHolden.pdf)
 
 ---
 
