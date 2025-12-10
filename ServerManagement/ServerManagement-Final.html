@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NET-2220 Final Capstone – Server Management (SERVER3)</title>
+  <meta name="description" content="Final capstone report for NET-2220 Server Management – full lifecycle of SERVER3 (deployment, hardening, patching, backup, automation).">
+  <link rel="icon" href="data:,">
+  <style>
+    :root{
+      --bg:#0b0d10; --card:#11151b; --ink:#e8edf3; --muted:#a7b3c2; --accent:#6ae3ff; --line:#1f2630;
+      --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f8fb; --card:#ffffff; --ink:#0b1220; --muted:#475569; --accent:#0066ff; --line:#e5e9f0; }
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background:radial-gradient(1200px 800px at 80% -10%,rgba(106,227,255,.12),transparent),
+                 linear-gradient(180deg,rgba(255,255,255,.02),transparent 200px), var(--bg);
+      color:var(--ink);
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 20px 60px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink)}
+    .logo{
+      width:42px; height:42px; border-radius:14px; background:
+        radial-gradient(14px 10px at 30% 30%, rgba(255,255,255,.3), transparent),
+        linear-gradient(135deg, var(--accent), #8ef7c2);
+      box-shadow: var(--shadow);
+    }
+    nav a{color:var(--muted); margin-left:14px; font-weight:600}
+    .hero{
+      border:1px solid var(--line); background:linear-gradient(180deg,rgba(255,255,255,.03),transparent), var(--card);
+      border-radius:var(--radius); padding:26px; box-shadow: var(--shadow); margin-bottom:20px;
+    }
+    .hero h1{margin:0 0 8px; font-size:clamp(26px,4vw,40px); line-height:1.15}
+    .hero p{margin:0; color:var(--muted)}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+    .chip{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--line); color:var(--muted)}
+    main{border-radius:var(--radius); border:1px solid var(--line); background:rgba(8,10,15,.9); padding:22px; margin-top:10px}
+    section{margin-bottom:26px}
+    h2{margin:0 0 10px; font-size:22px}
+    h3{margin:14px 0 6px; font-size:18px}
+    p{margin:6px 0}
+    .muted{color:var(--muted); font-size:14px}
+    table{width:100%; border-collapse:collapse; margin:10px 0; font-size:14px}
+    th,td{border:1px solid var(--line); padding:6px 8px; vertical-align:top}
+    th{background:rgba(255,255,255,.02); text-align:left}
+    code{background:rgba(255,255,255,.05); border-radius:6px; padding:2px 5px; font-size:13px}
+    pre{background:#05070c; border-radius:12px; padding:10px 12px; overflow:auto; border:1px solid var(--line); font-size:13px}
+    .toc{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 18px}
+    .toc a{font-size:13px; border-radius:999px; border:1px solid var(--line); padding:5px 10px; color:var(--muted)}
+    .toc a:hover{border-color:var(--accent); color:var(--accent); text-decoration:none}
+    .screenshots-grid{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:10px;
+    }
+    figure{margin:0; border-radius:14px; border:1px solid var(--line); background:var(--card); padding:10px}
+    figure img{width:100%; display:block; border-radius:10px; background:#000}
+    figcaption{margin-top:6px; font-size:13px; color:var(--muted)}
+    footer{margin-top:36px; color:var(--muted); font-size:13px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .pill{display:inline-block; padding:4px 9px; border-radius:999px; border:1px solid var(--line); font-size:12px; color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>Clayton Holden</strong><br>
+          <span style="color:var(--muted); font-size:13px">NET-2220 • Server Management Capstone</span>
+        </div>
+      </a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/ServerManagement/">Server Mgmt</a>
+        <a href="/CCNA-Security/">CCNA Security</a>
+        <a href="/files/ClaytonHoldenResume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>NET-2220 Final – Server Lifecycle Capstone (SERVER3)</h1>
+      <p>This report documents the full lifecycle of my Windows Server 2022 domain controller (SERVER3) for the corp.local domain: deployment, hardening, patching, backup, recovery, and automation.</p>
+      <div class="chips">
+        <span class="chip">Windows Server 2022</span>
+        <span class="chip">Active Directory</span>
+        <span class="chip">CIS Baseline</span>
+        <span class="chip">Backup & Automation</span>
+      </div>
+    </section>
+
+    <main>
+      <p class="muted">
+        This page mirrors the required capstone format for NET-2220 and serves as a professional, portfolio-ready summary of my work on SERVER3 throughout the semester.
+      </p>
+
+      <div class="toc">
+        <a href="#cover">1. Cover Sheet</a>
+        <a href="#inventory">2. System Inventory</a>
+        <a href="#roles">3. Implemented Roles</a>
+        <a href="#security">4. Security Summary</a>
+        <a href="#backup">5. Backup & Recovery</a>
+        <a href="#automation">6. Automation & Monitoring</a>
+        <a href="#change-record">7. Change Close-Out</a>
+        <a href="#screenshots">8. Screenshots Appendix</a>
+        <a href="#signoff">9. Sign-Off</a>
+      </div>
+
+      <!-- 1. Cover Sheet -->
+      <section id="cover">
+        <h2>1. Cover Sheet</h2>
+        <table>
+          <tr><th>Course</th><td>NET-2220 – Server Management</td></tr>
+          <tr><th>Student</th><td>Clayton Holden</td></tr>
+          <tr><th>Server Name</th><td>SERVER3</td></tr>
+          <tr><th>Domain</th><td>corp.local</td></tr>
+          <tr><th>Instructor</th><td>Norma DePriest</td></tr>
+          <tr><th>Submission Date</th><td>December 12, 2025</td></tr>
+          <tr><th>Deliverable</th><td>Final Capstone Server Management Report (Server Lifecycle Completion)</td></tr>
+        </table>
+      </section>
+
+      <!-- 2. System Inventory -->
+      <section id="inventory">
+        <h2>2. System Inventory</h2>
+        <p>The capstone environment is a Windows Server 2022 Standard (Desktop Experience) virtual machine running as SERVER3 in the corp.local domain. It was deployed, hardened, patched, backed up, and monitored as part of the NET-2220 course labs and milestones.</p>
+
+        <table>
+          <tr><th>Component</th><th>Details</th></tr>
+          <tr><td>Virtual Platform</td><td>VirtualBox VM</td></tr>
+          <tr><td>CPU</td><td>2 vCPU</td></tr>
+          <tr><td>RAM</td><td>4–8 GB</td></tr>
+          <tr><td>Disk Size</td><td>~60 GB virtual disk</td></tr>
+          <tr><td>Network</td><td>Lab network using DHCP (NAT or Bridged, depending on host configuration)</td></tr>
+          <tr><td>Operating System</td><td>Windows Server 2022 Standard (Desktop Experience)</td></tr>
+          <tr><td>Hostname</td><td>SERVER3</td></tr>
+          <tr><td>Domain Membership</td><td>corp.local</td></tr>
+          <tr><td>Primary Roles</td><td>AD DS, DNS, File Services, Windows Server Backup</td></tr>
+          <tr><td>IP Configuration</td><td>DHCP-assigned address, confirmed with <code>ipconfig /all</code></td></tr>
+          <tr><td>OS Build</td><td>Verified via <code>systeminfo</code> during lab work</td></tr>
+        </table>
+      </section>
+
+      <!-- 3. Implemented Roles & Services -->
+      <section id="roles">
+        <h2>3. Implemented Roles &amp; Services</h2>
+        <p>Throughout the course labs and milestones, SERVER3 was built out into a small enterprise-style domain controller providing identity, name resolution, and backup capabilities.</p>
+
+        <table>
+          <tr><th>Role / Feature</th><th>Status</th><th>Purpose</th></tr>
+          <tr>
+            <td>Active Directory Domain Services (AD DS)</td>
+            <td>Installed</td>
+            <td>Centralized authentication, user/group management, and policy enforcement for corp.local.</td>
+          </tr>
+          <tr>
+            <td>DNS Server</td>
+            <td>Installed</td>
+            <td>Required for AD DS; provides name resolution for domain clients and services.</td>
+          </tr>
+          <tr>
+            <td>Group Policy Management</td>
+            <td>Installed</td>
+            <td>Used to apply account policies, audit settings, and security baselines.</td>
+          </tr>
+          <tr>
+            <td>File Services</td>
+            <td>Installed</td>
+            <td>Supports local file storage and potential future shares.</td>
+          </tr>
+          <tr>
+            <td>Windows Server Backup</td>
+            <td>Installed</td>
+            <td>Enables full server backup and recovery operations.</td>
+          </tr>
+          <tr>
+            <td>PowerShell (Automation)</td>
+            <td>In Use</td>
+            <td>Used for verification, backup scheduling, and custom health/monitoring scripts.</td>
+          </tr>
+        </table>
+
+        <p class="muted">
+          Roles were verified using Server Manager and the command <code>Get-WindowsFeature | Where-Object {$_.InstallState -eq 'Installed'}</code>.
+        </p>
+      </section>
+
+      <!-- 4. Security Configuration Summary -->
+      <section id="security">
+        <h2>4. Security Configuration Summary</h2>
+
+        <h3>4.1 Password &amp; Account Lockout Policies</h3>
+        <p>Account policies were configured to align with CIS Windows Server 2022 Level 1 recommendations.</p>
+        <table>
+          <tr><th>Policy</th><th>Value</th></tr>
+          <tr><td>Minimum password length</td><td>12 characters</td></tr>
+          <tr><td>Maximum password age</td><td>60 days</td></tr>
+          <tr><td>Password history</td><td>24 remembered passwords</td></tr>
+          <tr><td>Password complexity</td><td>Enabled</td></tr>
+          <tr><td>Account lockout threshold</td><td>5 failed attempts</td></tr>
+          <tr><td>Lockout duration / reset</td><td>15 minutes</td></tr>
+        </table>
+
+        <p class="muted">
+          Configured via Local Security Policy → Account Policies → Password Policy and Account Lockout Policy.
+        </p>
+
+        <h3>4.2 Firewall Configuration</h3>
+        <p>All firewall profiles were enabled, and inbound access was restricted to only what is required:</p>
+        <table>
+          <tr><th>Profile</th><th>Status</th></tr>
+          <tr><td>Domain</td><td>Enabled</td></tr>
+          <tr><td>Private</td><td>Enabled</td></tr>
+          <tr><td>Public</td><td>Enabled</td></tr>
+        </table>
+
+        <ul>
+          <li>RDP (TCP 3389) allowed only from local subnet or lab network.</li>
+          <li>Unnecessary inbound rules reviewed and disabled.</li>
+          <li>“Block all inbound except allowed rules” enforced by profile.</li>
+        </ul>
+
+        <p class="muted">
+          Profiles and rules were confirmed in Windows Defender Firewall with Advanced Security and via PowerShell cmdlets such as <code>Get-NetFirewallProfile</code>.
+        </p>
+
+        <h3>4.3 Disabled Services</h3>
+        <p>To reduce attack surface, several legacy or unnecessary services were disabled:</p>
+        <table>
+          <tr><th>Service</th><th>Reason</th></tr>
+          <tr>
+            <td>RemoteRegistry</td>
+            <td>Prevents remote modification of the Windows registry.</td>
+          </tr>
+          <tr>
+            <td>Telnet (TlntSvr)</td>
+            <td>Legacy plaintext protocol; replaced by SSH/modern tooling.</td>
+          </tr>
+          <tr>
+            <td>Print Spooler</td>
+            <td>Disabled since no printing role is required on the domain controller.</td>
+          </tr>
+        </table>
+
+        <p class="muted">
+          Configured using <code>Set-Service -StartupType Disabled</code> for each service and verified in <code>services.msc</code> and via PowerShell.
+        </p>
+
+        <h3>4.4 Patch Level</h3>
+        <p>Patch status was verified as of December 2025 using:</p>
+        <pre><code>Get-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 10
+systeminfo | Select-String "KB"</code></pre>
+        <p>Windows Update history confirmed that the latest cumulative security updates had been applied. The server is fully patched as of the end of the course.</p>
+      </section>
+
+      <!-- 5. Backup and Recovery -->
+      <section id="backup">
+        <h2>5. Backup and Recovery</h2>
+
+        <h3>5.1 Backup Configuration</h3>
+        <p>Windows Server Backup was used to implement a full server backup regime.</p>
+
+        <table>
+          <tr><th>Backup Type</th><th>Frequency</th><th>Destination</th></tr>
+          <tr><td>Full Server Backup</td><td>Daily at 02:00 AM</td><td>BackupDisk (E:)</td></tr>
+        </table>
+
+        <p>Backup was scheduled using <code>wbadmin</code> and confirmed with:</p>
+        <pre><code>wbadmin enable backup -addtarget:E: -include:C: -allCritical -schedule:02:00 -quiet</code></pre>
+
+        <p>Initial backups were run manually using:</p>
+        <pre><code>wbadmin start backup -backuptarget:E: -include:C: -allCritical -quiet</code></pre>
+
+        <p class="muted">
+          Backup status and events were validated in Event Viewer under <strong>Applications and Services Logs → Microsoft-Windows-Backup</strong>.
+        </p>
+
+        <h3>5.2 Recovery Validation</h3>
+        <p>Available backup versions were listed with:</p>
+        <pre><code>wbadmin get versions</code></pre>
+        <p>Entries confirmed that full server and system-state backups are present and can be used for recovery. Backup completion and catalog integrity were verified in Event Viewer.</p>
+
+        <p>Even without restoring the entire server, this capstone confirms a documented, repeatable backup configuration, with clear steps for full restore if needed.</p>
+      </section>
+
+      <!-- 6. Automation and Monitoring -->
+      <section id="automation">
+        <h2>6. Automation and Monitoring</h2>
+        <p>To support ongoing health checks, I created a PowerShell monitoring script and scheduled it via Task Scheduler to generate daily status reports.</p>
+
+        <h3>6.1 Monitoring Script – <code>ServerMonitor.ps1</code></h3>
+        <p>Location: <code>C:\Scripts\Monitoring\ServerMonitor.ps1</code></p>
+        <p>Outputs: <code>C:\Scripts\Monitoring\Logs\Status_&lt;timestamp&gt;.txt</code></p>
+
+        <pre><code>$timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm"
+$report = "C:\Scripts\Monitoring\Logs\Status_$timestamp.txt"
+
+Add-Content $report "=== System Health Check ($timestamp) ==="
+Get-Service | Where-Object {$_.Status -ne 'Running'} | Out-File -Append $report
+Get-EventLog -LogName System -Newest 20 | Out-File -Append $report
+Get-Process | Sort-Object CPU -Descending | Select-Object -First 10 | Out-File -Append $report</code></pre>
+
+        <p>The report includes:</p>
+        <ul>
+          <li>All services that are not currently running.</li>
+          <li>The 20 most recent System log entries.</li>
+          <li>The top 10 CPU-consuming processes.</li>
+        </ul>
+
+        <h3>6.2 Scheduled Task</h3>
+        <p>A Task Scheduler entry named <strong>Server Monitoring Daily</strong> was created:</p>
+
+        <table>
+          <tr><th>Setting</th><th>Value</th></tr>
+          <tr><td>Trigger</td><td>Daily at 08:00 AM</td></tr>
+          <tr><td>Action</td><td><code>powershell.exe -File C:\Scripts\Monitoring\ServerMonitor.ps1</code></td></tr>
+          <tr><td>Run As</td><td>Administrative account</td></tr>
+        </table>
+
+        <p>Running the task manually and reviewing the generated log file confirmed that automation is functioning and producing usable status reports for operations or SOC review.</p>
+      </section>
+
+      <!-- 7. Change Control Close-Out Record -->
+      <section id="change-record">
+        <h2>7. Change Control Close-Out Record</h2>
+
+        <p>This section maps the work done in NET-2220 to an enterprise-style change record.</p>
+
+        <table>
+          <tr><th>Field</th><th>Value</th></tr>
+          <tr><td>Change Record ID</td><td>CR-NET2220-FINAL-2025</td></tr>
+          <tr><td>Change Type</td><td>Server Lifecycle Completion – Operational Acceptance</td></tr>
+          <tr><td>System</td><td>SERVER3 (Windows Server 2022 Domain Controller)</td></tr>
+          <tr><td>Date Implemented</td><td>August → December 2025</td></tr>
+        </table>
+
+        <h3>7.1 Lifecycle Summary</h3>
+        <table>
+          <tr><th>Item</th><th>Details</th></tr>
+          <tr>
+            <td>Initial Deployment</td>
+            <td>Server installed and configured per lab build standards; joined to corp.local.</td>
+          </tr>
+          <tr>
+            <td>Security Baseline</td>
+            <td>CIS Windows Server 2022 Level 1-aligned password, lockout, and firewall policies applied.</td>
+          </tr>
+          <tr>
+            <td>Patch Status</td>
+            <td>All relevant updates installed as of December 2025, verified via Windows Update and <code>Get-HotFix</code>.</td>
+          </tr>
+          <tr>
+            <td>Backup Policy</td>
+            <td>Daily full backups to BackupDisk (E:) using Windows Server Backup and <code>wbadmin</code> scheduling.</td>
+          </tr>
+          <tr>
+            <td>Automation</td>
+            <td><code>ServerMonitor.ps1</code> scheduled at 08:00 AM daily to generate health logs.</td>
+          </tr>
+          <tr>
+            <td>Monitoring Results</td>
+            <td>Last 7 days of logs present; no critical errors or failed backup entries observed.</td>
+          </tr>
+          <tr>
+            <td>Recovery Test</td>
+            <td>Backup versions listed and validated with <code>wbadmin get versions</code> and Event Viewer entries.</td>
+          </tr>
+          <tr>
+            <td>Operational State</td>
+            <td>Online, stable, serving as a domain controller and meeting lab requirements.</td>
+          </tr>
+          <tr>
+            <td>Rollback Plan</td>
+            <td>Snapshot “Final-Pre-Change-12-10-25” retained to allow rollback if future changes fail.</td>
+          </tr>
+          <tr>
+            <td>Audit Attachments</td>
+            <td>Screenshots and logs stored with this report and in the capstone folder.</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- 8. Screenshots Appendix -->
+      <section id="screenshots">
+        <h2>8. Screenshots Appendix</h2>
+        <p class="muted">
+          All screenshots are stored under <code>/ServerManagement/assets/</code> in this GitHub repository and correspond to the evidence used in Milestones 1–3 and this final capstone.
+        </p>
+
+        <div class="screenshots-grid">
+          <figure>
+            <img src="/ServerManagement/assets/final-01-system-properties.png" alt="System Properties – SERVER3 joined to corp.local">
+            <figcaption>Figure 1 – System Properties showing hostname SERVER3 and domain membership.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-02-ipconfig.png" alt="ipconfig /all output">
+            <figcaption>Figure 2 – <code>ipconfig /all</code> output confirming network configuration.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-03-server-manager-roles.png" alt="Server Manager roles installed">
+            <figcaption>Figure 3 – Server Manager with AD DS, DNS, File Services, and Windows Server Backup installed.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-04-password-policy.png" alt="Password policy and lockout configuration">
+            <figcaption>Figure 4 – Password and account lockout policies aligned to CIS baseline.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-05-firewall-rules.png" alt="Firewall profiles and rules">
+            <figcaption>Figure 5 – Windows Defender Firewall profiles enabled and inbound rules configured.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-06-disabled-services.png" alt="Disabled services in PowerShell">
+            <figcaption>Figure 6 – Disabled services (RemoteRegistry, Telnet, Print Spooler) shown via PowerShell.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-07-windows-update.png" alt="Windows Update history">
+            <figcaption>Figure 7 – Windows Update history confirming current patch level.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-08-hotfix.png" alt="Get-HotFix output">
+            <figcaption>Figure 8 – <code>Get-HotFix</code> output listing installed KBs.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-09-backup-schedule.png" alt="Backup schedule summary">
+            <figcaption>Figure 9 – Windows Server Backup schedule configuration.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-10-backup-event-viewer.png" alt="Backup completion in Event Viewer">
+            <figcaption>Figure 10 – Event Viewer entries showing successful backup operations.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-11-wbadmin-versions.png" alt="wbadmin get versions output">
+            <figcaption>Figure 11 – <code>wbadmin get versions</code> listing available backup images.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-12-task-scheduler.png" alt="Task Scheduler – ServerMonitor.ps1">
+            <figcaption>Figure 12 – Task Scheduler task that runs <code>ServerMonitor.ps1</code> daily.</figcaption>
+          </figure>
+          <figure>
+            <img src="/ServerManagement/assets/final-13-monitor-log.png" alt="Sample ServerMonitor status log">
+            <figcaption>Figure 13 – Sample daily server health report generated by <code>ServerMonitor.ps1</code>.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 9. Sign-Off Section -->
+      <section id="signoff">
+        <h2>9. Sign-Off</h2>
+        <p>This section models an enterprise-style operational acceptance sign-off for SERVER3.</p>
+        <table>
+          <tr><th>Role</th><th>Name</th><th>Date</th><th>Status</th></tr>
+          <tr>
+            <td>System Administrator</td>
+            <td>Clayton Holden</td>
+            <td>12/11/2025</td>
+            <td>Approved</td>
+          </tr>
+          <tr>
+            <td>Change Manager</td>
+            <td>Norma DePriest</td>
+            <td>12/12/2025</td>
+            <td>Approved</td>
+          </tr>
+          <tr>
+            <td>Security Officer</td>
+            <td>—</td>
+            <td>—</td>
+            <td>Pending / Not Required</td>
+          </tr>
+        </table>
+
+        <p class="muted">
+          Outcome: SERVER3 is accepted into service as a domain controller for corp.local with documented deployment, security baseline, patching, backup, and monitoring controls in place.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <div>© <span id="y"></span> Clayton Holden • NET-2220 Server Management Capstone</div>
+      <div><span class="pill">deployment → hardening → patching → backup → automation</span></div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
