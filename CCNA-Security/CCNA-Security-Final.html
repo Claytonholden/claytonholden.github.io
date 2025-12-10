@@ -1,446 +1,373 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Network Defense Final Report – Clayton Holden</title>
-  <meta name="description" content="Network Defense Final Report summarizing defense-in-depth design, monitoring, and incident response." />
-  <link rel="icon" href="data:,">
+  <meta charset="utf-8">
+  <title>Network Defense Final Report – CYBR-2102</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
     :root{
-      --bg:#0b0d10; --card:#11151b; --ink:#e8edf3; --muted:#a7b3c2; --accent:#6ae3ff; --line:#1f2630;
-      --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+      --bg:#050712; --card:#0f1624; --ink:#e7edf7; --muted:#9aa6bd; --accent:#6ae3ff;
+      --line:#1f2937; --radius:16px;
     }
     @media (prefers-color-scheme: light){
-      :root{ --bg:#f6f8fb; --card:#ffffff; --ink:#0b1220; --muted:#475569; --accent:#0066ff; --line:#e5e9f0; }
+      :root{
+        --bg:#f5f7fb; --card:#ffffff; --ink:#0b1120; --muted:#4b5563; --accent:#0066ff; --line:#e5e7eb;
+      }
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-      background:radial-gradient(1200px 800px at 80% -10%,rgba(106,227,255,.12),transparent),
-                 linear-gradient(180deg,rgba(255,255,255,.02),transparent 200px), var(--bg);
+      font:15px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Inter,Arial,sans-serif;
+      background:radial-gradient(1200px 800px at 80% -10%,rgba(106,227,255,.14),transparent),
+                 linear-gradient(180deg,rgba(255,255,255,.03),transparent 220px),
+                 var(--bg);
       color:var(--ink);
     }
-    .wrap{max-width:900px;margin:0 auto;padding:28px 20px 60px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
-    .logo{
-      width:42px;height:42px;border-radius:14px;background:
-        radial-gradient(14px 10px at 30% 30%,rgba(255,255,255,.3),transparent),
-        linear-gradient(135deg,var(--accent),#8ef7c2);
-      box-shadow:var(--shadow);
-    }
-    nav a{color:var(--muted);text-decoration:none;margin-left:14px;font-weight:600}
-    main{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(255,255,255,.03),transparent),var(--card);
-      border-radius:var(--radius);
-      padding:24px 22px 28px;
-      box-shadow:var(--shadow);
-    }
-    h1,h2,h3{margin-top:0;}
-    h1{font-size:26px;margin-bottom:4px}
-    h2{font-size:20px;margin:22px 0 8px}
-    h3{font-size:16px;margin:18px 0 6px}
-    .meta{color:var(--muted);font-size:14px;margin-bottom:16px}
-    p{margin:6px 0 10px}
-    ul{margin-top:4px;margin-bottom:10px;padding-left:20px}
-    li{margin-bottom:4px}
+    .wrap{max-width:1100px;margin:0 auto;padding:26px 18px 60px;}
+    header{margin-bottom:20px;}
+    h1{margin:0 0 4px;font-size:clamp(26px,3.2vw,34px);}
+    h2{margin:22px 0 8px;font-size:20px;}
+    h3{margin:16px 0 6px;font-size:16px;}
+    p{margin:0 0 10px;}
+    .muted{color:var(--muted);}
     .card{
-      border-radius:14px;
+      background:var(--card);
       border:1px solid var(--line);
-      padding:14px 14px 12px;
-      margin:10px 0 6px;
-      background:rgba(0,0,0,.08);
+      border-radius:var(--radius);
+      padding:18px 20px;
+      margin-bottom:18px;
+      box-shadow:0 14px 35px rgba(0,0,0,.35);
     }
-    .muted{color:var(--muted);font-size:14px}
-    table{width:100%;border-collapse:collapse;margin:8px 0 12px;font-size:14px}
-    th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top}
-    th{background:rgba(255,255,255,.02);text-align:left}
-    code{
-      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size:13px;
-      background:rgba(255,255,255,.04);
-      padding:2px 5px;
-      border-radius:4px;
-      border:1px solid rgba(255,255,255,.05);
-    }
-    .toc{
-      border-radius:12px;
-      border:1px dashed var(--line);
-      padding:10px 12px;
-      background:rgba(0,0,0,.16);
+    table{
+      border-collapse:collapse;
+      width:100%;
+      margin-top:8px;
       font-size:14px;
-      margin-bottom:12px;
     }
-    .toc a{color:var(--accent);text-decoration:none}
-    .toc li{margin-bottom:2px}
-    footer{margin-top:18px;color:var(--muted);font-size:13px;text-align:right}
-    a{color:var(--accent)}
+    th,td{
+      border:1px solid var(--line);
+      padding:6px 8px;
+      text-align:left;
+      vertical-align:top;
+    }
+    th{background:rgba(255,255,255,.02);}
+    .pill{
+      display:inline-block;
+      padding:3px 7px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      font-size:12px;
+      color:var(--muted);
+      margin-right:6px;
+      margin-bottom:4px;
+    }
+    .evidence-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:14px;
+      margin-top:10px;
+    }
+    figure{
+      margin:0;
+      background:rgba(3,7,18,.6);
+      border-radius:12px;
+      border:1px solid var(--line);
+      padding:8px;
+    }
+    figure img{
+      max-width:100%;
+      border-radius:8px;
+      display:block;
+    }
+    figcaption{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    code{
+      font-family:ui-monospace,Menlo,Consolas,monospace;
+      font-size:13px;
+      background:rgba(15,23,42,.8);
+      border-radius:6px;
+      padding:2px 5px;
+    }
+    .small{font-size:13px;color:var(--muted);}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header>
-      <a class="brand" href="/">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <strong>Clayton Holden</strong><br>
-          <span class="muted">CYBR-2102 • Network Defense Fundamentals</span>
-        </div>
-      </a>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/CCNA-Security/index.md">Course Page</a>
-      </nav>
+
+    <!-- 1. COVER SHEET -->
+    <header class="card">
+      <h1>Network Defense Final Report</h1>
+      <p class="muted">CYBR-2102 • CCNA Security / Network Defense Fundamentals</p>
+      <table>
+        <tr><th>Student</th><td>Clayton Holden</td></tr>
+        <tr><th>Server / Lab Environment</th><td>Packet Tracer lab topology + Windows host for logs</td></tr>
+        <tr><th>Date</th><td>Dec 12, 2025</td></tr>
+        <tr><th>Title</th><td>End-to-End Network Defense: Design, Detection, and Response</td></tr>
+      </table>
     </header>
 
-    <main>
-      <!-- 1. Cover Sheet -->
-      <section id="cover">
-        <h1>Network Defense Final Report</h1>
-        <div class="meta">
-          Course: CYBR-2102 – Network Defense Fundamentals<br>
-          Student: Clayton Holden<br>
-          Date: December 2025
-        </div>
+    <!-- 2. EXECUTIVE SUMMARY -->
+    <section class="card">
+      <h2>2. Executive Summary</h2>
+      <p>
+        This report summarizes my work in CYBR-2102 across three main areas: designing a
+        defense-in-depth network, detecting hostile activity in packet captures, and responding to an
+        RDP-based incident using NIST SP 800-61. I built a segmented Packet Tracer environment with
+        external, DMZ and internal zones; enforced least-privilege access using Cisco IOS ACLs and host
+        firewalls; analyzed traffic in Wireshark for ping sweeps, TCP port scans and ICMP floods; and
+        documented a full incident-response workflow including containment, eradication, and recovery.
+      </p>
+      <p>
+        All controls are mapped to CIS Controls v8 and NIST SP 800-61 where appropriate, and the
+        attached evidence shows configuration screens, packet captures, and automation used to monitor
+        and harden the environment.
+      </p>
+    </section>
 
-        <div class="card toc">
-          <strong>Sections</strong>
-          <ul>
-            <li><a href="#exec">2. Executive Summary</a></li>
-            <li><a href="#arch">3. System Architecture &amp; Defense Layers</a></li>
-            <li><a href="#monitoring">4. Monitoring &amp; Threat Detection</a></li>
-            <li><a href="#ir">5. Incident Response Summary</a></li>
-            <li><a href="#improve">6. Continuous Improvement &amp; Change Documentation</a></li>
-            <li><a href="#refs">7. References / Frameworks</a></li>
-            <li><a href="#appendix">8. Appendix – Evidence Checklist</a></li>
-          </ul>
-        </div>
-      </section>
+    <!-- 3. SYSTEM ARCHITECTURE & DEFENSE LAYERS -->
+    <section class="card">
+      <h2>3. System Architecture &amp; Defense Layers</h2>
+      <p>
+        The Packet Tracer topology follows a classic three-tier design: external network →
+        perimeter firewall/router → DMZ → internal LAN. Each zone has explicit ACLs and host-level
+        controls instead of relying on a single perimeter rule.
+      </p>
 
-      <!-- 2. Executive Summary -->
-      <section id="exec">
-        <h2>2. Executive Summary</h2>
-        <p>
-          This report summarizes my work in CYBR-2102 – Network Defense Fundamentals and
-          documents a complete defense lifecycle: designing a segmented network,
-          monitoring for hostile activity, and responding to an incident using
-          NIST SP 800-61 and CIS Controls. Over the course, I designed a small
-          enterprise-style network in Packet Tracer, captured and analyzed traffic
-          in Wireshark, and wrote an incident response plan for a brute-force RDP
-          attack with attempted data exfiltration.
-        </p>
-        <p>
-          The final environment demonstrates layered controls at the perimeter,
-          network, and host levels, plus monitoring and change documentation that
-          match how entry-level SOC analysts and network defenders are expected to
-          work in a real organization.
-        </p>
-      </section>
+      <h3>3.1 Topology and Zones</h3>
+      <div class="evidence-grid">
+        <figure>
+          <img src="/CCNA-Security/assets/Lab1_Diagram_Holden.png" alt="Packet Tracer network diagram with external, DMZ, and internal segments">
+          <figcaption>Figure 3.1 – Defense-in-depth topology (external, DMZ, internal).</figcaption>
+        </figure>
+      </div>
 
-      <!-- 3. System Architecture & Defense Layers -->
-      <section id="arch">
-        <h2>3. System Architecture &amp; Defense Layers</h2>
+      <h3>3.2 Perimeter &amp; DMZ Controls</h3>
+      <p>
+        The edge router/firewall enforces least privilege between zones. Only HTTP from the Internet to
+        the DMZ web server is allowed; direct Internet → internal access is denied. Administrative access
+        to the router is restricted to a management subnet.
+      </p>
+      <div class="evidence-grid">
+        <figure>
+          <img src="/CCNA-Security/assets/Lab1_FirewallRules_Holden.png" alt="Edge firewall ACL configuration for Lab 1">
+          <figcaption>Figure 3.2 – ACLs on the perimeter device enforcing DMZ-only HTTP and management-only SSH.</figcaption>
+        </figure>
+        <figure>
+          <img src="/CCNA-Security/assets/Lab2_FirewallRules_Holden.png" alt="Additional firewall rules from Lab 2">
+          <figcaption>Figure 3.3 – Extended ACLs refining allowed/blocked flows.</figcaption>
+        </figure>
+        <figure>
+          <img src="/CCNA-Security/assets/Lab2_AllowedConnection_Holden.png" alt="Packet Tracer test of allowed connection">
+          <figcaption>Figure 3.4 – Verification of a permitted HTTP connection into the DMZ.</figcaption>
+        </figure>
+        <figure>
+          <img src="/CCNA-Security/assets/Lab2_BlockedConnection_Holden.png" alt="Packet Tracer test of blocked connection">
+          <figcaption>Figure 3.5 – Internal resource correctly blocked from direct Internet reachability.</figcaption>
+        </figure>
+      </div>
 
-        <h3>3.1 Logical Network Design</h3>
-        <p>
-          The core design is a three-zone defense-in-depth architecture built in Packet Tracer:
-        </p>
-        <ul>
-          <li><strong>External:</strong> Simulated Internet / untrusted network.</li>
-          <li><strong>DMZ:</strong> 192.168.10.0/24 – public-facing web server and DNS.</li>
-          <li><strong>Internal LAN:</strong> 192.168.20.0/24 – user workstations and file server.</li>
-        </ul>
-        <p>
-          A perimeter device (Cisco firewall/router) provides segmentation between
-          the external network, DMZ, and internal LAN. Each interface is assigned
-          to its own subnet and security zone.
-        </p>
+      <h3>3.3 Host &amp; Management Plane Protection</h3>
+      <p>
+        DMZ and internal hosts use local firewalls to restrict inbound management ports and to log
+        unauthorized access attempts. Router and switch management is secured with SSH and role-based
+        access.
+      </p>
+      <div class="evidence-grid">
+        <figure>
+          <img src="/CCNA-Security/assets/Lab1_HostFirewall_Holden.png" alt="Host firewall configuration">
+          <figcaption>Figure 3.6 – Host firewall on internal server enforcing local policy.</figcaption>
+        </figure>
+        <figure>
+          <img src="/CCNA-Security/assets/Lab2_SSH_Refuse_Holden.png" alt="SSH refusal for unauthorized management host">
+          <figcaption>Figure 3.7 – SSH refused when source does not match approved management subnet.</figcaption>
+        </figure>
+      </div>
+    </section>
 
-        <h3>3.2 Layered Controls</h3>
-        <p>The design implemented multiple layers of security:</p>
-        <ul>
-          <li>
-            <strong>Perimeter:</strong> Ingress ACLs permit only required traffic
-            (HTTP/HTTPS to the DMZ web server) and drop all other unsolicited traffic.
-          </li>
-          <li>
-            <strong>Network:</strong> ACLs block direct DMZ–Internal communication,
-            enforce least privilege between VLANs, and restrict management access
-            to specific admin IPs.
-          </li>
-          <li>
-            <strong>Host:</strong> Local firewalls are enabled on key systems
-            (Admin PC, FileServer) and hardened login banners are configured on
-            Cisco IOS devices.
-          </li>
-          <li>
-            <strong>Application/Data:</strong> Access-control matrix defines which
-            roles (Admin, IT Support, User) can access the web server, file shares,
-            and management interfaces.
-          </li>
-        </ul>
+    <!-- 4. MONITORING & THREAT DETECTION -->
+    <section class="card">
+      <h2>4. Monitoring &amp; Threat Detection</h2>
+      <p>
+        Wireshark was used to capture and analyze several simulated attacks: an ICMP ping sweep, a TCP
+        SYN scan, and a high-rate ICMP flood. Display filters allowed me to isolate each pattern and
+        classify it as malicious or suspicious.
+      </p>
 
-        <div class="card">
-          <h3>3.3 What Milestone 1 Demonstrates</h3>
-          <p>
-            Milestone 1 shows that I can move beyond a single firewall rule and
-            design a layered architecture where each segment and device has a
-            specific security role and associated controls. The Packet Tracer
-            project includes connectivity tests and ACL verification to prove
-            that the intended policy is actually enforced.
-          </p>
-          <p class="muted">
-            Supporting artifact: Milestone 1 — Defense-in-Depth Diagram &amp; Access Policy (PDF).
-          </p>
-        </div>
-      </section>
+      <h3>4.1 Tools &amp; Methods</h3>
+      <p>
+        Primary tool: <span class="pill">Wireshark</span> with filters like
+        <code>icmp</code> and
+        <code>tcp.flags.syn == 1 and tcp.flags.ack == 0</code>. Simulated attacks were generated from a
+        dedicated “attacker” host in Packet Tracer.
+      </p>
 
-      <!-- 4. Monitoring & Threat Detection -->
-      <section id="monitoring">
-        <h2>4. Monitoring &amp; Threat Detection</h2>
+      <div class="evidence-grid">
+        <figure>
+          <img src="/CCNA-Security/assets/Lab3_TCPPortScanSim_Holden.png" alt="Wireshark TCP port scan simulation">
+          <figcaption>Figure 4.1 – TCP SYN scan showing sequential SYN packets to multiple ports.</figcaption>
+        </figure>
+        <figure>
+          <img src="/CCNA-Security/assets/Lab4_HFDOSlikeICMPTraffic_Holden.png" alt="High-frequency ICMP DoS-like capture">
+          <figcaption>Figure 4.2 – High-frequency ICMP traffic indicating a DoS-style flood.</figcaption>
+        </figure>
+        <figure>
+          <img src="/CCNA-Security/assets/Lab4_ICMPSweepSuspiciousPattern_Holden.png" alt="ICMP ping sweep pattern">
+          <figcaption>Figure 4.3 – ICMP sweep with a repeating pattern across multiple hosts.</figcaption>
+        </figure>
+      </div>
 
-        <h3>4.1 Tools and Data Collected</h3>
-        <p>
-          For Milestone 2, I used Wireshark to capture several minutes of live traffic
-          in the lab environment. The capture included ICMP, TCP, DNS, ARP, and TLS.
-          To simulate adversary behavior, I generated:
-        </p>
-        <ul>
-          <li>An ICMP ping sweep across a large range of IP addresses.</li>
-          <li>A TCP SYN scan against ports 1–20 on the gateway.</li>
-          <li>High-rate ICMP with larger payloads to mimic DoS-style traffic.</li>
-        </ul>
+      <h3>4.2 Secure Remote Access Monitoring</h3>
+      <p>
+        SSH was configured as the secure management protocol. Captures confirmed encrypted sessions and
+        logged both failed and successful logins.
+      </p>
+      <div class="evidence-grid">
+        <figure>
+          <img src="/CCNA-Security/assets/Lab3_SimulationsSSHSecure_Holden.png" alt="Simulation of secure SSH configuration">
+          <figcaption>Figure 4.4 – Simulation/test of SSH as the secure management protocol.</figcaption>
+        </figure>
+        <figure>
+          <img src="/CCNA-Security/assets/Lab3_SSHCommands_Holden.png" alt="SSH configuration commands">
+          <figcaption>Figure 4.5 – IOS configuration and verification commands for SSH.</figcaption>
+        </figure>
+        <figure>
+          <img src="/CCNA-Security/assets/Lab3_SuccessfulSSHLogin_Holden.png" alt="Successful SSH login output">
+          <figcaption>Figure 4.6 – Successful SSH login from an authorized admin host.</figcaption>
+        </figure>
+      </div>
+    </section>
 
-        <h3>4.2 Analysis Approach</h3>
-        <p>
-          I relied on Wireshark display filters to isolate suspicious behavior, for example:
-        </p>
-        <ul>
-          <li><code>icmp</code> to aggregate ping sweeps and ICMP floods.</li>
-          <li><code>tcp.flags.syn == 1 and tcp.flags.ack == 0</code> to identify SYN scans.</li>
-        </ul>
-        <p>
-          Each pattern was classified as a true positive (intentionally generated),
-          and I documented how it would look within a SOC workflow: initial alert,
-          verification, and correlation with other data such as source IP and port ranges.
-        </p>
+    <!-- 5. INCIDENT RESPONSE SUMMARY -->
+    <section class="card">
+      <h2>5. Incident Response Summary</h2>
+      <p>
+        Milestone 3 applied NIST SP 800-61 to a simulated “Unauthorized RDP brute-force and data
+        exfiltration attempt” on an internal Windows server. Logs showed repeated Event ID 4625 failures
+        followed by suspicious outbound traffic.
+      </p>
 
-        <h3>4.3 Mapping to CIS / NIST Controls</h3>
-        <ul>
-          <li>
-            Rate limiting and filtering ICMP aligns with CIS Control 4 (Secure Network Configurations)
-            and NIST SI-4 (System Monitoring).
-          </li>
-          <li>
-            Detecting port scans and DoS attempts maps to tuning IDS/IPS and log sources
-            as described in CIS Controls 8 and 13.
-          </li>
-          <li>
-            Keeping firewall and router firmware patched ties back to vulnerability
-            management requirements (CIS 7, NIST RA/SA families).
-          </li>
-        </ul>
+      <h3>5.1 Timeline (High Level)</h3>
+      <ul class="small">
+        <li><strong>Detection</strong> – Security log alerts for repeated 4625 failures from a single IP.</li>
+        <li><strong>Analysis</strong> – Confirmed malicious RDP attempts and unusual outbound connections.</li>
+        <li><strong>Containment</strong> – Disabled the targeted account and blocked the attacker IP at the firewall.</li>
+        <li><strong>Eradication</strong> – Anti-malware scan and removal of any artifacts on the affected host.</li>
+        <li><strong>Recovery</strong> – Restored any impacted files from backup, monitored for recurrence.</li>
+        <li><strong>Lessons Learned</strong> – Hardened RDP exposure, lockout policy, and monitoring rules.</li>
+      </ul>
 
-        <div class="card">
-          <h3>4.4 What Milestone 2 Demonstrates</h3>
-          <p>
-            Milestone 2 shows that I can move from raw packets to detection and
-            recommendations. I can interpret packet captures, identify scanning
-            and flooding behaviors, and suggest concrete configuration changes
-            that would reduce risk in a real environment.
-          </p>
-          <p class="muted">
-            Supporting artifact: Milestone 2 – Traffic Analysis Report (PDF).
-          </p>
-        </div>
-      </section>
+      <div class="evidence-grid">
+        <figure>
+          <img src="/CCNA-Security/assets/Lab6_4625_Holden.png" alt="Windows Event Viewer showing 4625 failures">
+          <figcaption>Figure 5.1 – Windows Security log showing repeated 4625 failed logon events.</figcaption>
+        </figure>
+        <figure>
+          <img src="/CCNA-Security/assets/Lab6_FirewallBlockRule_Holden.png" alt="Firewall rule blocking malicious RDP source">
+          <figcaption>Figure 5.2 – Firewall rule blocking the attacker IP as part of containment.</figcaption>
+        </figure>
+      </div>
+    </section>
 
-      <!-- 5. Incident Response Summary -->
-      <section id="ir">
-        <h2>5. Incident Response Summary</h2>
+    <!-- 6. CONTINUOUS IMPROVEMENT & CHANGE DOC -->
+    <section class="card">
+      <h2>6. Continuous Improvement &amp; Change Documentation</h2>
+      <p>
+        After the incident simulation, I implemented follow-up changes to strengthen monitoring and
+        access controls. These map directly to CIS Controls and NIST guidance.
+      </p>
 
-        <h3>5.1 Scenario</h3>
-        <p>
-          Milestone 3 focused on an “Unauthorized RDP brute-force and data exfiltration
-          attempt” against an internal Windows system. The attack was detected via
-          Windows Security log Event ID 4625 (failed logon attempts) and unusual
-          outbound traffic.
-        </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Change ID</th>
+            <th>Description of Change</th>
+            <th>Framework Reference</th>
+            <th>Implemented By</th>
+            <th>Date Completed</th>
+            <th>Validation Evidence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CR-001</td>
+            <td>Added firewall ACL blocking unauthorized RDP attempts from untrusted networks.</td>
+            <td>CIS Control 4.4 • NIST SI-4</td>
+            <td>Clayton Holden</td>
+            <td>12/10/25</td>
+            <td>Firewall rule screenshot (Fig 5.2).</td>
+          </tr>
+          <tr>
+            <td>CR-002</td>
+            <td>Created daily log-collection / health-check script and scheduled it to run automatically.</td>
+            <td>CIS Control 8.2 • NIST AU-6</td>
+            <td>Clayton Holden</td>
+            <td>12/10/25</td>
+            <td>Script, output, and Task Scheduler evidence (Figs 6.1–6.3).</td>
+          </tr>
+        </tbody>
+      </table>
 
-        <h3>5.2 NIST SP 800-61 Lifecycle</h3>
+      <div class="evidence-grid">
+        <figure>
+          <img src="/CCNA-Security/assets/Lab5_Script_Holden.png" alt="PowerShell or IOS script window">
+          <figcaption>Figure 6.1 – Monitoring/automation script used for daily checks.</figcaption>
+        </figure>
+        <figure>
+          <img src="/CCNA-Security/assets/Lab5_Output_Holden.png" alt="Script output window">
+          <figcaption>Figure 6.2 – Sample output from the monitoring script.</figcaption>
+        </figure>
+        <figure>
+          <img src="/CCNA-Security/assets/Lab5_TaskScheduler_Holden.png" alt="Task Scheduler configuration">
+          <figcaption>Figure 6.3 – Task Scheduler entry showing automated daily execution.</figcaption>
+        </figure>
+      </div>
+    </section>
 
-        <h4>Preparation</h4>
-        <ul>
-          <li>Logging enabled on Windows endpoints and network devices.</li>
-          <li>Incident response roles and communication channels defined.</li>
-          <li>Baseline documentation for normal login and traffic patterns.</li>
-        </ul>
+    <!-- 7. REFERENCES -->
+    <section class="card">
+      <h2>7. References / Frameworks Used</h2>
+      <ul class="small">
+        <li>CIS Controls v8 – Center for Internet Security.</li>
+        <li>NIST SP 800-61 Rev. 2 – Computer Security Incident Handling Guide.</li>
+        <li>Cisco IOS Security Configuration Guides.</li>
+        <li>Wireshark Documentation and Display Filter Reference.</li>
+      </ul>
+    </section>
 
-        <h4>Detection and Analysis</h4>
-        <ul>
-          <li>
-            SOC tooling and log review highlighted repeated 4625 failures from a
-            single source IP.
-          </li>
-          <li>
-            Analysts correlated the failed RDP attempts with outbound connections,
-            indicating possible credential guessing plus attempted data exfiltration.
-          </li>
-        </ul>
+    <!-- 8. APPENDIX -->
+    <section class="card">
+      <h2>8. Appendix – Evidence Screenshots</h2>
+      <p class="small">
+        All evidence is embedded above in context; this appendix provides a quick gallery view.
+      </p>
+      <div class="evidence-grid">
+        <figure><img src="/CCNA-Security/assets/Lab1_Diagram_Holden.png" alt=""><figcaption>Lab 1 – Network diagram.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab1_FirewallRules_Holden.png" alt=""><figcaption>Lab 1 – Perimeter ACLs.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab1_HostFirewall_Holden.png" alt=""><figcaption>Lab 1 – Host firewall.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab2_FirewallRules_Holden.png" alt=""><figcaption>Lab 2 – Refined ACLs.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab2_AllowedConnection_Holden.png" alt=""><figcaption>Lab 2 – Allowed connection test.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab2_BlockedConnection_Holden.png" alt=""><figcaption>Lab 2 – Blocked connection test.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab2_SSH_Refuse_Holden.png" alt=""><figcaption>Lab 2 – SSH refusal from unapproved host.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab3_SimulationsSSHSecure_Holden.png" alt=""><figcaption>Lab 3 – SSH secure simulation.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab3_SSHCommands_Holden.png" alt=""><figcaption>Lab 3 – SSH commands.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab3_SuccessfulSSHLogin_Holden.png" alt=""><figcaption>Lab 3 – Successful SSH login.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab3_TCPPortScanSim_Holden.png" alt=""><figcaption>Lab 3 – TCP port-scan capture.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab4_HFDOSlikeICMPTraffic_Holden.png" alt=""><figcaption>Lab 4 – ICMP DoS-like traffic.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab4_ICMPSweepSuspiciousPattern_Holden.png" alt=""><figcaption>Lab 4 – ICMP sweep pattern.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab5_Script_Holden.png" alt=""><figcaption>Lab 5 – Monitoring script.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab5_Output_Holden.png" alt=""><figcaption>Lab 5 – Script output.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab5_TaskScheduler_Holden.png" alt=""><figcaption>Lab 5 – Task Scheduler config.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab6_4625_Holden.png" alt=""><figcaption>Lab 6 – 4625 failed logons.</figcaption></figure>
+        <figure><img src="/CCNA-Security/assets/Lab6_FirewallBlockRule_Holden.png" alt=""><figcaption>Lab 6 – Firewall block rule.</figcaption></figure>
+      </div>
+      <p class="small" style="margin-top:10px;">
+        This HTML mirrors the content that will go into <strong>Lastname_CYBR2102_FinalReport.pdf</strong>.
+      </p>
+    </section>
 
-        <h4>Containment</h4>
-        <ul>
-          <li>Disabled the compromised or targeted account.</li>
-          <li>Blocked the attacker’s source IP at the firewall/edge device.</li>
-          <li>Stopped or restricted outbound transfer attempts during investigation.</li>
-        </ul>
-
-        <h4>Eradication</h4>
-        <ul>
-          <li>Ran anti-malware and integrity checks on the affected host.</li>
-          <li>Removed any suspicious artifacts or tools discovered.</li>
-        </ul>
-
-        <h4>Recovery</h4>
-        <ul>
-          <li>Restored any impacted data from known-good backups.</li>
-          <li>Returned services to normal operation while monitoring closely for new attempts.</li>
-        </ul>
-
-        <h4>Post-Incident Activity</h4>
-        <ul>
-          <li>
-            Root cause summarized as exposed RDP with weak authentication and
-            lockout controls.
-          </li>
-          <li>
-            Recommended enforcing MFA, limiting RDP to VPN or trusted networks,
-            and tightening account lockout policies.
-          </li>
-          <li>
-            Mapped recommendations back to CIS Controls (e.g., CIS 4, 6, 16) and
-            NIST SP 800-61 guidance on lessons learned.
-          </li>
-        </ul>
-
-        <div class="card">
-          <h3>5.3 What Milestone 3 Demonstrates</h3>
-          <p>
-            Milestone 3 ties together network monitoring, host security, and backup
-            into a single incident response playbook. It shows that I can describe
-            not only what happened, but how to contain, eradicate, and prevent
-            similar incidents in the future.
-          </p>
-          <p class="muted">
-            Supporting artifact: Milestone 3 – Incident Response Plan (PDF).
-          </p>
-        </div>
-      </section>
-
-      <!-- 6. Continuous Improvement & Change Documentation -->
-      <section id="improve">
-        <h2>6. Continuous Improvement &amp; Change Documentation</h2>
-        <p>
-          After walking through the milestones, I identified concrete changes that
-          would improve the network’s security posture and mapped them to CIS and
-          NIST controls. These changes are recorded in the table below in the same
-          style as an enterprise change-control log.
-        </p>
-
-        <table>
-          <thead>
-            <tr>
-              <th>Change ID</th>
-              <th>Description of Change</th>
-              <th>Framework Reference</th>
-              <th>Implemented By</th>
-              <th>Date Completed</th>
-              <th>Validation Evidence</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>CR-001</td>
-              <td>Added firewall ACL blocking unauthorized RDP and limiting access to trusted admin IPs only.</td>
-              <td>CIS Control 4.4 (Secure Configurations) / NIST SP 800-53: AC-17, SI-4</td>
-              <td>Clayton Holden</td>
-              <td>12/10/2025</td>
-              <td>Firewall configuration screenshot and successful test of allowed/blocked RDP attempts.</td>
-            </tr>
-            <tr>
-              <td>CR-002</td>
-              <td>Documented and tuned daily log review process focusing on failed logons and port-scan behavior.</td>
-              <td>CIS Control 8.2 (Log Management) / NIST SP 800-53: AU-6</td>
-              <td>Clayton Holden</td>
-              <td>12/10/2025</td>
-              <td>Example log extracts showing filtered events and analyst notes.</td>
-            </tr>
-            <tr>
-              <td>CR-003</td>
-              <td>Updated incident response checklist to require backup verification before recovery steps.</td>
-              <td>CIS Control 11 (Data Recovery) / NIST SP 800-61</td>
-              <td>Clayton Holden</td>
-              <td>12/10/2025</td>
-              <td>Revised IR runbook page and test restore notes.</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <p>
-          These improvements close the loop from lab work to an operational mindset:
-          every change is tied to a control, and each control has evidence that it
-          was applied and tested.
-        </p>
-      </section>
-
-      <!-- 7. References -->
-      <section id="refs">
-        <h2>7. References / Frameworks Used</h2>
-        <ul>
-          <li>
-            Center for Internet Security (CIS). <em>CIS Controls v8</em> – especially
-            Controls 4, 7, 8, 11, and 13.
-          </li>
-          <li>
-            NIST Special Publication 800-61 Revision 2. <em>Computer Security Incident Handling Guide</em>.
-          </li>
-          <li>
-            NIST Special Publication 800-53 Revision 5. <em>Security and Privacy Controls for Information Systems</em>.
-          </li>
-          <li>
-            Cisco Packet Tracer and Cisco IOS documentation for ACLs, VLANs, and secure management access.
-          </li>
-          <li>
-            Wireshark User Guide and display-filter reference for ICMP, TCP, and scan detection.
-          </li>
-        </ul>
-      </section>
-
-      <!-- 8. Appendix -->
-      <section id="appendix">
-        <h2>8. Appendix – Evidence Checklist</h2>
-        <p class="muted">
-          In the PDF submission, each screenshot and table will be labeled with the
-          section number it supports.
-        </p>
-        <ul>
-          <li>Figure A1 – Final network diagram with External, DMZ, and Internal zones (Section 3).</li>
-          <li>Figure A2 – Packet Tracer view of ACLs and interface assignments (Section 3).</li>
-          <li>Figure A3 – Wireshark capture showing ping sweep and SYN scan filters (Section 4).</li>
-          <li>Figure A4 – Example log snippet or SOC-style analysis notes (Section 4).</li>
-          <li>Figure A5 – Incident response timeline or key Windows Security log entries (Section 5).</li>
-          <li>Figure A6 – Firewall configuration confirming RDP access restrictions (Section 6).</li>
-          <li>Figure A7 – Sample log review notes for daily monitoring (Section 6).</li>
-        </ul>
-      </section>
-    </main>
-
-    <footer>
-      Network Defense Final Report • Clayton Holden
-    </footer>
   </div>
 </body>
 </html>
