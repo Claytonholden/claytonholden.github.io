@@ -85,9 +85,9 @@
 
     <section class="hero">
       <h1>NET-2220 Final – Server Lifecycle Capstone (SERVER3)</h1>
-      <p>This report documents the full lifecycle of my Windows Server 2022 domain controller (SERVER3) for the corp.local domain: deployment, hardening, patching, backup, recovery, and automation.</p>
+      <p>This report documents the full lifecycle of my Windows Server 2019 domain controller (SERVER3) for the corp.local domain: deployment, hardening, patching, backup, recovery, and automation.</p>
       <div class="chips">
-        <span class="chip">Windows Server 2022</span>
+        <span class="chip">Windows Server 2019</span>
         <span class="chip">Active Directory</span>
         <span class="chip">CIS Baseline</span>
         <span class="chip">Backup & Automation</span>
@@ -128,7 +128,7 @@
       <!-- 2. System Inventory -->
       <section id="inventory">
         <h2>2. System Inventory</h2>
-        <p>The capstone environment is a Windows Server 2022 Standard (Desktop Experience) virtual machine running as SERVER3 in the corp.local domain. It was deployed, hardened, patched, backed up, and monitored as part of the NET-2220 course labs and milestones.</p>
+        <p>The capstone environment is a Windows Server 2019 Standard (Desktop Experience) virtual machine running as SERVER3 in the corp.local domain. It was deployed, hardened, patched, backed up, and monitored as part of the NET-2220 course labs and milestones.</p>
 
         <table>
           <tr><th>Component</th><th>Details</th></tr>
@@ -137,7 +137,7 @@
           <tr><td>RAM</td><td>4–8 GB</td></tr>
           <tr><td>Disk Size</td><td>~60 GB virtual disk</td></tr>
           <tr><td>Network</td><td>Lab network using DHCP (NAT or Bridged, depending on host configuration)</td></tr>
-          <tr><td>Operating System</td><td>Windows Server 2022 Standard (Desktop Experience)</td></tr>
+          <tr><td>Operating System</td><td>Windows Server 2019 Standard (Desktop Experience)</td></tr>
           <tr><td>Hostname</td><td>SERVER3</td></tr>
           <tr><td>Domain Membership</td><td>corp.local</td></tr>
           <tr><td>Primary Roles</td><td>AD DS, DNS, File Services, Windows Server Backup</td></tr>
@@ -195,7 +195,7 @@
         <h2>4. Security Configuration Summary</h2>
 
         <h3>4.1 Password &amp; Account Lockout Policies</h3>
-        <p>Account policies were configured to align with CIS Windows Server 2022 Level 1 recommendations.</p>
+        <p>Account policies were configured to align with CIS Windows Server 2019 Level 1 recommendations.</p>
         <table>
           <tr><th>Policy</th><th>Value</th></tr>
           <tr><td>Minimum password length</td><td>12 characters</td></tr>
@@ -335,7 +335,7 @@ Get-Process | Sort-Object CPU -Descending | Select-Object -First 10 | Out-File -
           <tr><th>Field</th><th>Value</th></tr>
           <tr><td>Change Record ID</td><td>CR-NET2220-FINAL-2025</td></tr>
           <tr><td>Change Type</td><td>Server Lifecycle Completion – Operational Acceptance</td></tr>
-          <tr><td>System</td><td>SERVER3 (Windows Server 2022 Domain Controller)</td></tr>
+          <tr><td>System</td><td>SERVER3 (Windows Server 2019 Domain Controller)</td></tr>
           <tr><td>Date Implemented</td><td>August → December 2025</td></tr>
         </table>
 
@@ -348,7 +348,7 @@ Get-Process | Sort-Object CPU -Descending | Select-Object -First 10 | Out-File -
           </tr>
           <tr>
             <td>Security Baseline</td>
-            <td>CIS Windows Server 2022 Level 1-aligned password, lockout, and firewall policies applied.</td>
+            <td>CIS Windows Server 2019 Level 1-aligned password, lockout, and firewall policies applied.</td>
           </tr>
           <tr>
             <td>Patch Status</td>
