@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Python Essentials – Clayton Holden</title>
+  <meta name="description" content="Python Essentials capstone: CLI utilities, decision helper, loop/list lab, functions lab, and Baseball Walkup Song Player." />
+  <link rel="icon" href="data:,">
+  <style>
+    :root{
+      --bg:#0b0d10; --card:#11151b; --ink:#e8edf3; --muted:#a7b3c2; --accent:#6ae3ff; --line:#1f2630;
+      --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f8fb; --card:#ffffff; --ink:#0b1220; --muted:#475569; --accent:#0066ff; --line:#e5e9f0; }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background:radial-gradient(1200px 800px at 80% -10%,rgba(106,227,255,.12),transparent),
+                 linear-gradient(180deg,rgba(255,255,255,.02),transparent 200px), var(--bg);
+      color:var(--ink);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 20px 60px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink)}
+    .logo{
+      width:42px; height:42px; border-radius:14px; background:
+        radial-gradient(14px 10px at 30% 30%, rgba(255,255,255,.3), transparent),
+        linear-gradient(135deg, var(--accent), #8ef7c2);
+      box-shadow: var(--shadow);
+    }
+    nav a{color:var(--muted); text-decoration:none; margin-left:14px; font-weight:600}
+
+    .hero{
+      border:1px solid var(--line); background:linear-gradient(180deg,rgba(255,255,255,.03),transparent), var(--card);
+      border-radius:var(--radius); padding:28px; box-shadow: var(--shadow); margin-bottom:24px;
+    }
+    .hero h1{margin:0 0 10px; font-size:clamp(26px,4vw,40px); line-height:1.15}
+    .hero p{margin:0; color:var(--muted)}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+    .chip{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--line); color:var(--muted)}
+
+    h2{margin-top:32px; margin-bottom:6px}
+    h3{margin-top:20px; margin-bottom:6px}
+    .meta{color:var(--muted); font-size:14px}
+    .section-card{
+      border:1px solid var(--line); background:var(--card); border-radius:var(--radius);
+      padding:20px; margin-top:14px; box-shadow:0 5px 16px rgba(0,0,0,.25);
+    }
+    p{margin:0 0 10px}
+    ul{margin:0 0 12px 18px; padding:0}
+    code{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+         font-size:13px; background:rgba(15,23,42,.7); color:#e5e7eb; padding:2px 5px; border-radius:6px}
+    pre{
+      margin:10px 0 0; padding:14px 16px; border-radius:14px;
+      background:#020617; border:1px solid var(--line); overflow:auto;
+      font-size:13px; line-height:1.5;
+    }
+    pre code{background:none; padding:0}
+    details{margin-top:12px}
+    details summary{
+      cursor:pointer; font-weight:600; color:var(--accent);
+      list-style:none;
+    }
+    details summary::-webkit-details-marker{display:none}
+    footer{margin-top:40px; color:var(--muted); font-size:13px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>Clayton Holden</strong><br>
+          <span style="color:var(--muted); font-size:13px">Cyber • Portfolio</span>
+        </div>
+      </a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#courses">Courses</a>
+        <a href="/files/ClaytonHoldenResume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Python Essentials – Project Portfolio</h1>
+      <p>
+        Command-line tools and a service learning project built during an 8-week Python Essentials course.
+        The focus was on readable code, functions, and practical automation.
+      </p>
+      <div class="chips">
+        <span class="chip">CLI Tools</span>
+        <span class="chip">Functions & Loops</span>
+        <span class="chip">Service Learning Project</span>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <h2>Course Outcomes</h2>
+      <p>By the end of the course I could:</p>
+      <ul>
+        <li>Write menu-driven command-line programs with clean prompts and validation.</li>
+        <li>Use lists, loops, and functions to keep logic organized and re-usable.</li>
+        <li>Build small utilities that solve real problems (calculator, decision helper, etc.).</li>
+        <li>Develop a larger “Baseball Walkup Song Player” project that someone else can run and maintain.</li>
+      </ul>
+      <p class="meta">
+        All project source files live under
+        <code>PythonEssentials/projects/</code> (and <code>/projects/WalkupSongPlayer/</code> for the capstone app).
+      </p>
+    </section>
+
+    <!-- CLI CALCULATOR -->
+    <section class="section-card">
+      <h2>Project 1 – CLI Calculator</h2>
+      <p>
+        A simple calculator that runs in the terminal. The user picks an operation and enters two numbers.
+        The script validates input, performs the math, and loops until the user chooses to quit.
+      </p>
+      <p class="meta">
+        File: <code>PythonEssentials/projects/cli-calculator.py</code>
+      </p>
+
+      <details>
+        <summary>View calculator code</summary>
+        <pre><code># cli-calculator.py
+
+def get_number(prompt: str) -&gt; float:
+    """Prompt until the user enters a valid number."""
+    while True:
+        raw = input(prompt).strip()
+        try:
+            return float(raw)
+        except ValueError:
+            print(f"  [!] '{raw}' is not a valid number. Try again.")
+
+def get_operation() -&gt; str:
+    """Return one of + - * / or q to quit."""
+    valid = {"+", "-", "*", "/", "q"}
+    while True:
+        op = input("Choose operation (+, -, *, /) or q to quit: ").strip()
+        if op in valid:
+            return op
+        print("  [!] Invalid choice. Use + - * / or q.")
+
+def calculate(a: float, b: float, op: str) -&gt; float:
+    if op == "+": return a + b
+    if op == "-": return a - b
+    if op == "*": return a * b
+    if op == "/":
+        if b == 0:
+            raise ZeroDivisionError("Cannot divide by zero.")
+        return a / b
+    raise ValueError(f"Unsupported operation {op!r}")
+
+def main() -&gt; None:
+    print("=== CLI Calculator ===")
+    while True:
+        op = get_operation()
+        if op == "q":
+            print("Goodbye.")
+            break
+
+        a = get_number("First number:  ")
+        b = get_number("Second number: ")
+
+        try:
+            result = calculate(a, b, op)
+            print(f"Result: {a} {op} {b} = {result}\n")
+        except ZeroDivisionError as exc:
+            print(f"  [!] Error: {exc}\n")
+
+if __name__ == "__main__":
+    main()</code></pre>
+      </details>
+    </section>
+
+    <!-- DECISION HELPER -->
+    <section class="section-card">
+      <h2>Project 2 – Decision Helper</h2>
+      <p>
+        A branching decision helper that asks a series of questions and prints a recommendation.
+        It can be adapted for troubleshooting, study planning, or simple “what should I do next?” flows.
+      </p>
+      <p class="meta">
+        File: <code>PythonEssentials/projects/decision-helper.py</code>
+      </p>
+
+      <details>
+        <summary>View decision helper code</summary>
+        <pre><code># decision-helper.py
+
+def ask_yes_no(prompt: str) -&gt; bool:
+    while True:
+        ans = input(prompt + " [y/n]: ").strip().lower()
+        if ans in {"y", "yes"}:
+            return True
+        if ans in {"n", "no"}:
+            return False
+        print("  [!] Please answer with y or n.")
+
+def main() -&gt; None:
+    print("=== Decision Helper ===")
+    print("This mini expert system walks through a few questions and suggests a next step.\n")
+
+    tired = ask_yes_no("Are you mentally tired?")
+    blocked = ask_yes_no("Are you stuck on a technical problem?")
+    deadline_soon = ask_yes_no("Do you have a deadline within 24 hours?")
+
+    if deadline_soon and blocked:
+        recommendation = "Take a 5-minute break, then search docs / error messages and ask for help if still stuck."
+    elif deadline_soon and not blocked:
+        recommendation = "Focus on the deliverable. Avoid distractions until the main task is done."
+    elif not deadline_soon and tired:
+        recommendation = "Step away, grab water or food, and come back later with a fresh mind."
+    else:
+        recommendation = "Use this time to practice or refactor an existing project."
+
+    print("\nSuggested next step:")
+    print(f"- {recommendation}")
+
+if __name__ == "__main__":
+    main()</code></pre>
+      </details>
+    </section>
+
+    <!-- LOOP & LIST LAB -->
+    <section class="section-card">
+      <h2>Project 3 – Loop &amp; List Lab</h2>
+      <p>
+        This lab focuses on loops and lists: the script collects items from the user,
+        stores them in a list, and prints a small summary report.
+      </p>
+      <p class="meta">
+        File: <code>PythonEssentials/projects/loop-list-lab.py</code>
+      </p>
+
+      <details>
+        <summary>View loop &amp; list lab code</summary>
+        <pre><code># loop-list-lab.py
+
+def collect_items() -&gt; list[str]:
+    print("Enter tools you use regularly (blank line to finish):")
+    items: list[str] = []
+    while True:
+        entry = input("Tool: ").strip()
+        if not entry:
+            break
+        items.append(entry)
+    return items
+
+def show_summary(items: list[str]) -&gt; None:
+    print("\n=== Tool Summary ===")
+    if not items:
+        print("No tools entered.")
+        return
+
+    print(f"Total tools: {len(items)}")
+    print("Unique tools:", len(set(item.lower() for item in items)))
+    print("\nList:")
+    for i, item in enumerate(items, start=1):
+        print(f"{i:2}. {item}")
+
+def main() -&gt; None:
+    tools = collect_items()
+    show_summary(tools)
+
+if __name__ == "__main__":
+    main()</code></pre>
+      </details>
+    </section>
+
+    <!-- FUNCTIONS LAB -->
+    <section class="section-card">
+      <h2>Project 4 – Functions Lab</h2>
+      <p>
+        This lab emphasizes breaking logic into small functions and using a clear
+        <code>main()</code> entry point. The example here is a tiny grade calculator.
+      </p>
+      <p class="meta">
+        File: <code>PythonEssentials/projects/functions-lab.py</code>
+      </p>
+
+      <details>
+        <summary>View functions lab code</summary>
+        <pre><code># functions-lab.py
+
+from typing import Sequence
+
+def average(values: Sequence[float]) -&gt; float:
+    if not values:
+        raise ValueError("Cannot average an empty list.")
+    return sum(values) / len(values)
+
+def get_scores() -&gt; list[float]:
+    scores: list[float] = []
+    print("Enter assignment scores (0–100). Blank line to finish.")
+    while True:
+        raw = input("Score: ").strip()
+        if not raw:
+            break
+        try:
+            value = float(raw)
+            if 0 &lt;= value &lt;= 100:
+                scores.append(value)
+            else:
+                print("  [!] Score must be between 0 and 100.")
+        except ValueError:
+            print("  [!] Please enter a number.")
+    return scores
+
+def letter_grade(score: float) -&gt; str:
+    if score &gt;= 90: return "A"
+    if score &gt;= 80: return "B"
+    if score &gt;= 70: return "C"
+    if score &gt;= 60: return "D"
+    return "F"
+
+def main() -&gt; None:
+    print("=== Grade Calculator ===")
+    scores = get_scores()
+    if not scores:
+        print("No scores entered.")
+        return
+
+    avg = average(scores)
+    print(f"\nAverage: {avg:.2f}%  (Letter grade: {letter_grade(avg)})")
+
+if __name__ == "__main__":
+    main()</code></pre>
+      </details>
+    </section>
+
+    <!-- WALKUP SONG PLAYER -->
+    <section class="section-card">
+      <h2>Service Learning Project – Baseball Walkup Song Player</h2>
+      <p>
+        The capstone project for this course is a command-line Baseball Walkup Song Player.
+        It is designed to run on a laptop at the field and quickly trigger the correct walkup
+        song for each player.
+      </p>
+      <p class="meta">
+        Project folder: <code>/projects/WalkupSongPlayer/</code> (main script and supporting files).
+      </p>
+
+      <h3>Features</h3>
+      <ul>
+        <li>Stores a roster of players and their walkup songs in a simple data structure.</li>
+        <li>Displays a numbered player menu with search by jersey number or name.</li>
+        <li>Plays (or simulates playing) the correct audio track when a player is selected.</li>
+        <li>Logs each play so you can review usage after the game.</li>
+      </ul>
+
+      <details>
+        <summary>View example walkup player code</summary>
+        <pre><code># walkup_song_player.py (simplified example)
+
+from dataclasses import dataclass
+from typing import Dict, List
+import datetime
+import pathlib
+import subprocess
+import sys
+
+BASE_DIR = pathlib.Path(__file__).resolve().parent
+LOG_FILE = BASE_DIR / "walkup_log.txt"
+
+@dataclass
+class Player:
+    number: int
+    name: str
+    song_title: str
+    file_path: pathlib.Path
+
+ROSTER: Dict[int, Player] = {
+    2: Player(2,  "Clayton Holden", "Walkup Anthem",
+              BASE_DIR / "audio" / "clayton_walkup.mp3"),
+    7: Player(7,  "Player Seven",   "Power Track",
+              BASE_DIR / "audio" / "player7.mp3"),
+    12: Player(12, "Player Twelve", "Hype Song",
+               BASE_DIR / "audio" / "player12.mp3"),
+    # add more players here
+}
+
+def clear_screen() -&gt; None:
+    if sys.platform.startswith("win"):
+        subprocess.call("cls", shell=True)
+    else:
+        subprocess.call("clear", shell=True)
+
+def print_menu() -&gt; None:
+    print("=== Baseball Walkup Song Player ===\n")
+    print("Select a player by number, or type Q to quit.\n")
+    for number, player in sorted(ROSTER.items()):
+        print(f"{number:2}  {player.name:20}  -  {player.song_title}")
+    print()
+
+def play_song(player: Player) -&gt; None:
+    timestamp = datetime.datetime.now().isoformat(timespec="seconds")
+    log_line = f"{timestamp}  #{player.number} {player.name}  -  {player.song_title}\n"
+    LOG_FILE.write_text(LOG_FILE.read_text() + log_line if LOG_FILE.exists() else log_line)
+
+    print(f"\n[Playing] {player.name} – {player.song_title}")
+    print(f"File: {player.file_path}")
+
+    # If you have a CLI audio player installed, uncomment one of these:
+    # subprocess.Popen([\"start\", str(player.file_path)], shell=True)  # Windows
+    # subprocess.Popen([\"afplay\", str(player.file_path)])             # macOS
+    # subprocess.Popen([\"mpv\", str(player.file_path)])                # cross-platform
+
+def main() -&gt; None:
+    while True:
+        clear_screen()
+        print_menu()
+        choice = input("Player number (or Q): ").strip().lower()
+        if choice in {"q", "quit", "exit"}:
+            print("Good game. Exiting.")
+            break
+        try:
+            number = int(choice)
+        except ValueError:
+            input("\n[!] Invalid choice. Press Enter to continue...")
+            continue
+
+        player = ROSTER.get(number)
+        if not player:
+            input("\n[!] No player with that number. Press Enter to continue...")
+            continue
+
+        play_song(player)
+        input("\nPress Enter when the batter is finished...")
+
+if __name__ == "__main__":
+    main()</code></pre>
+      </details>
+
+      <p class="meta">
+        This project shows I can move from small labs to a real, field-ready tool with menus,
+        data structures, logging, and (optional) audio integration.
+      </p>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> Clayton Holden • Python Essentials</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
