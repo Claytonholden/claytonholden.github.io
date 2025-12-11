@@ -1,0 +1,38 @@
+{
+  "10": {
+    "jersey": 10,
+    "name": "Clayton Holden",
+    "file": "clayton_holden.mp3",
+    "start": 25
+  },
+  "50": {
+    "jersey": 50,
+    "name": "AJ Hall",
+    "file": "aj_hall.mp3",
+    "start": 38
+  },
+  "7": {
+    "jersey": 7,
+    "name": "Ethan Martin",
+    "file": "ethan_martin.mp3",
+    "start": 8
+  },
+  "22": {
+    "jersey": 22,
+    "name": "Jake Winland",
+    "file": "jake_winland.mp3",
+    "start": 6
+  },
+  "5": {
+    "jersey": 5,
+    "name": "Joe Helmes",
+    "file": "joe_helmes.mp3",
+    "start": 10
+  },
+  "12": {
+    "jersey": 12,
+    "name": "Benny Jack",
+    "file": "benny_jack.mp3",
+    "start": 5
+  }
+}
