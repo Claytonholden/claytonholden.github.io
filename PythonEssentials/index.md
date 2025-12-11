@@ -112,7 +112,7 @@ You can view the code here:
 ## Spotlight Project – Baseball Walkup Song Player
 
 **File:** `baseball-walkup-player.py`  
-**Location:** `PythonEssentials/projects/Walkup/baseball-walkup-player.py`
+**Location:** `PythonEssentials/projects/WalkupSongPlayer/baseball-walkup-player.py`
 
 This “service learning” project is a more complete program:  
 a **Baseball Walkup Song Player** designed to run during games.
@@ -135,7 +135,7 @@ This project shows that I can:
 I plan to deployed in real games for the Hocking College Hawks in 2026.
 
 You can view the code here:  
-`PythonEssentials/projects/Walkup/baseball-walkup-player.py`
+`PythonEssentials/projects/WalkupSongPlayer/baseball-walkup-player.py`
 
 ---
 
