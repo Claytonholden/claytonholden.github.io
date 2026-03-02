@@ -2,51 +2,225 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ethical Hacking</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ethical Hacking • Clayton Holden</title>
+  <meta name="description" content="Ethical Hacking – weekly notes + labs + NCL practice writeups." />
+  <link rel="icon" href="data:,">
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 16px; }
-    code, pre { background: #f5f5f5; padding: 2px 6px; border-radius: 6px; }
-    a { text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-    .card { border: 1px solid #e5e5e5; border-radius: 10px; padding: 12px 14px; }
-    .muted { color: #666; font-size: 0.95rem; }
+    :root{
+      --bg:#0b0d10; --card:#11151b; --ink:#e8edf3; --muted:#a7b3c2; --accent:#6ae3ff; --line:#1f2630;
+      --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f8fb; --card:#ffffff; --ink:#0b1220; --muted:#475569; --accent:#0066ff; --line:#e5e9f0; }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background:radial-gradient(1200px 800px at 80% -10%,rgba(106,227,255,.12),transparent),
+                 linear-gradient(180deg,rgba(255,255,255,.02),transparent 200px), var(--bg);
+      color:var(--ink);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 20px 60px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink)}
+    .logo{
+      width:42px; height:42px; border-radius:14px; background:
+        radial-gradient(14px 10px at 30% 30%, rgba(255,255,255,.3), transparent),
+        linear-gradient(135deg, var(--accent), #8ef7c2);
+      box-shadow: var(--shadow);
+    }
+    nav a{color:var(--muted); text-decoration:none; margin-left:14px; font-weight:600}
+    .hero{
+      border:1px solid var(--line); background:linear-gradient(180deg,rgba(255,255,255,.03),transparent), var(--card);
+      border-radius:var(--radius); padding:28px; box-shadow: var(--shadow); margin-bottom:18px;
+    }
+    .hero h1{margin:0 0 8px; font-size:clamp(26px,4vw,40px); line-height:1.15}
+    .hero p{margin:0; color:var(--muted)}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+    .chip{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--line); color:var(--muted)}
+
+    .section-title{margin:24px 0 10px; color:var(--muted); font-weight:700; letter-spacing:.02em}
+
+    .grid{
+      display:grid; grid-template-columns:repeat(12,1fr); gap:18px; align-items:stretch;
+    }
+    @media (max-width:860px){ .grid{grid-template-columns:repeat(6,1fr)} }
+    @media (max-width:560px){ .grid{grid-template-columns:repeat(1,1fr)} }
+
+    .card{
+      grid-column: span 4;
+      border:1px solid var(--line); background:var(--card);
+      border-radius:var(--radius); padding:18px; display:flex; flex-direction:column; gap:12px;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      height:100%;
+    }
+    .card:hover{ transform: translateY(-3px); box-shadow: var(--shadow); border-color: rgba(106,227,255,.4);}
+    .card h3{margin:0; font-size:18px;}
+    .card p{margin:0; color:var(--muted);}
+    .meta{color:var(--muted); font-size:13px}
+    .btn{
+      align-self:flex-start; text-decoration:none; font-weight:700; padding:10px 14px; border-radius:12px;
+      border:1px solid var(--line); color:var(--ink); background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);
+      margin-top:6px;
+    }
+    ul{margin-top:8px}
+    footer{margin-top:36px; color:var(--muted); font-size:13px}
+    .muted{color:var(--muted)}
   </style>
 </head>
-<body>
-  <h1>Ethical Hacking</h1>
-  <p class="muted">8-week notes + labs + exam cheatsheets (open-book friendly).</p>
 
-  <h2>Weeks</h2>
-  <div class="grid">
-    <div class="card"><a href="./Week01/">Week 01</a></div>
-    <div class="card"><a href="./Week02/">Week 02</a></div>
-    <div class="card"><a href="./Week03/">Week 03</a></div>
-    <div class="card"><a href="./Week04/">Week 04</a></div>
-    <div class="card"><a href="./Week05/">Week 05</a></div>
-    <div class="card"><a href="./Week06/">Week 06</a></div>
-    <div class="card"><a href="./Week07/">Week 07</a></div>
-    <div class="card"><a href="./Week08/">Week 08</a></div>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>Clayton Holden</strong><br>
+          <span style="color:var(--muted); font-size:13px">Cyber • Portfolio</span>
+        </div>
+      </a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#courses">Courses</a>
+        <a href="/files/ClaytonHoldenResume.pdf" target="_blank" rel="noopener">Resume</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Ethical Hacking – Weekly Notes & Labs</h1>
+      <p>
+        An 8-week build of practical offensive security fundamentals: OSINT, scanning & enumeration,
+        traffic analysis, log forensics, web app testing, wireless basics, and crypto foundations — plus
+        NCL Gymnasium practice write-ups.
+      </p>
+      <div class="chips">
+        <span class="chip">Kali Linux</span>
+        <span class="chip">Nmap / NSE</span>
+        <span class="chip">Wireshark / Tshark</span>
+        <span class="chip">Log Analysis</span>
+        <span class="chip">NCL Practice</span>
+      </div>
+    </section>
+
+    <h2 class="section-title">Course Outcomes</h2>
+    <p>By the end of this project I can:</p>
+    <ul>
+      <li>Perform reconnaissance (passive + active) and document an attack surface clearly.</li>
+      <li>Scan and enumerate services with Nmap + NSE scripts and summarize risk findings.</li>
+      <li>Analyze packet captures (HTTP/TLS/Telnet/CAN/wireless basics) with Wireshark/tshark.</li>
+      <li>Extract facts from logs (auth, FTP, web access) using filters, regex, and scripting.</li>
+      <li>Write clean walkthroughs that explain tools, commands, and why the results matter.</li>
+    </ul>
+
+    <h2 class="section-title">Weeks (8-Week Plan)</h2>
+    <section class="grid">
+      <!-- Week 1 -->
+      <article class="card">
+        <div class="meta">Week 1</div>
+        <h3>OSINT & Recon</h3>
+        <p>
+          Passive recon methods, DNS/WHOIS basics, and intro scanning mindset.
+          Includes starter notes + first write-ups.
+        </p>
+        <a class="btn" href="/Ethical-Hacking/Week01-OSINT/">Open Week 1</a>
+      </article>
+
+      <!-- Week 2 -->
+      <article class="card">
+        <div class="meta">Week 2</div>
+        <h3>Scanning & Enumeration</h3>
+        <p>
+          Nmap scan types, service/version detection, common ports,
+          and basic enumeration workflows.
+        </p>
+        <span class="muted">Coming soon</span>
+      </article>
+
+      <!-- Week 3 -->
+      <article class="card">
+        <div class="meta">Week 3</div>
+        <h3>SMB / FTP Enumeration</h3>
+        <p>
+          SMB discovery, enum4linux, smbclient, shares/users, and
+          how misconfigurations show up in results.
+        </p>
+        <span class="muted">Coming soon</span>
+      </article>
+
+      <!-- Week 4 -->
+      <article class="card">
+        <div class="meta">Week 4</div>
+        <h3>Packet Analysis</h3>
+        <p>
+          Wireshark essentials: filters, streams, protocol fields,
+          and extracting key artifacts from PCAPs.
+        </p>
+        <span class="muted">Coming soon</span>
+      </article>
+
+      <!-- Week 5 -->
+      <article class="card">
+        <div class="meta">Week 5</div>
+        <h3>Log Analysis & Forensics</h3>
+        <p>
+          Authentication logs, FTP logs, web access logs, and using scripts
+          to answer “who/what/when/where”.
+        </p>
+        <span class="muted">Coming soon</span>
+      </article>
+
+      <!-- Week 6 -->
+      <article class="card">
+        <div class="meta">Week 6</div>
+        <h3>Web App Basics</h3>
+        <p>
+          Core web vuln concepts (auth, input, sessions), and safe lab testing workflows.
+        </p>
+        <span class="muted">Coming soon</span>
+      </article>
+
+      <!-- Week 7 -->
+      <article class="card">
+        <div class="meta">Week 7</div>
+        <h3>Wireless & Password Cracking</h3>
+        <p>
+          Wireless capture basics, encryption concepts, cracking workflow,
+          and interpreting tool output correctly.
+        </p>
+        <span class="muted">Coming soon</span>
+      </article>
+
+      <!-- Week 8 -->
+      <article class="card">
+        <div class="meta">Week 8</div>
+        <h3>Crypto & CTF Style Review</h3>
+        <p>
+          Simple ciphers, RSA fundamentals, and pulling everything together
+          with NCL-style challenge practice.
+        </p>
+        <span class="muted">Coming soon</span>
+      </article>
+    </section>
+
+    <h2 class="section-title">NCL Practice (Write-ups)</h2>
+    <p>
+      This section collects repeatable walkthroughs for the NCL-style tasks I’ve been practicing
+      (scanning, logs, packet dissection, forensics, crypto, and more). Each write-up includes:
+      tools used, exact commands, and validation steps.
+    </p>
+    <p>
+      <a class="btn" href="/Ethical-Hacking/NCL/">Open NCL Write-ups</a>
+    </p>
+
+    <footer>
+      <div>© <span id="y"></span> Clayton Holden • Built with GitHub Pages</div>
+    </footer>
   </div>
 
-  <h2>Cheatsheets (exam day)</h2>
-  <ul>
-    <li><a href="./Cheatsheets/nmap.md">Nmap</a></li>
-    <li><a href="./Cheatsheets/smb-enum.md">SMB (enum4linux / smbclient)</a></li>
-    <li><a href="./Cheatsheets/wireshark.md">Wireshark / tshark</a></li>
-    <li><a href="./Cheatsheets/web-recon.md">Web recon</a></li>
-    <li><a href="./Cheatsheets/crypto.md">Crypto / encoding basics</a></li>
-    <li><a href="./Cheatsheets/linux.md">Linux CLI</a></li>
-  </ul>
-
-  <h2>Labs</h2>
-  <ul>
-    <li><a href="./Labs/nmap-enum.md">Enumeration with Nmap</a></li>
-    <li><a href="./Labs/enum4linux-smbclient.md">Enum4linux + smbclient</a></li>
-    <li><a href="./Labs/exiftool.md">ExifTool metadata</a></li>
-    <li><a href="./Labs/shodan.md">Shodan searches</a></li>
-    <li><a href="./Labs/beef-set.md">BeEF + SET (concepts & safe lab notes)</a></li>
-  </ul>
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
