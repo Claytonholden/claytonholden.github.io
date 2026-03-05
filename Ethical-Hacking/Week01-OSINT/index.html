@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Week 1 • OSINT & Recon • Ethical Hacking</title>
+  <meta name="description" content="Week 1 notes: OSINT & recon fundamentals + starter NCL practice workflow." />
+  <link rel="icon" href="data:,">
+  <style>
+    :root{
+      --bg:#0b0d10; --card:#11151b; --ink:#e8edf3; --muted:#a7b3c2; --accent:#6ae3ff; --line:#1f2630;
+      --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f8fb; --card:#ffffff; --ink:#0b1220; --muted:#475569; --accent:#0066ff; --line:#e5e9f0; }
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background:radial-gradient(1200px 800px at 80% -10%,rgba(106,227,255,.12),transparent),
+                 linear-gradient(180deg,rgba(255,255,255,.02),transparent 200px), var(--bg);
+      color:var(--ink);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:28px 20px 60px}
+    header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink)}
+    .logo{
+      width:42px; height:42px; border-radius:14px; background:
+        radial-gradient(14px 10px at 30% 30%, rgba(255,255,255,.3), transparent),
+        linear-gradient(135deg, var(--accent), #8ef7c2);
+      box-shadow: var(--shadow);
+    }
+    nav a{color:var(--muted); text-decoration:none; margin-left:14px; font-weight:600}
+    .hero{
+      border:1px solid var(--line); background:linear-gradient(180deg,rgba(255,255,255,.03),transparent), var(--card);
+      border-radius:18px; padding:28px; box-shadow: var(--shadow); margin-bottom:18px;
+    }
+    .hero h1{margin:0 0 8px; font-size:clamp(26px,4vw,40px); line-height:1.15}
+    .hero p{margin:0; color:var(--muted)}
+    .section-title{margin:24px 0 10px; color:var(--muted); font-weight:700; letter-spacing:.02em}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    @media (max-width:860px){ .grid{grid-template-columns:repeat(6,1fr)} }
+    @media (max-width:560px){ .grid{grid-template-columns:repeat(1,1fr)} }
+    .card{
+      grid-column: span 6;
+      border:1px solid var(--line); background:var(--card);
+      border-radius:18px; padding:18px; display:flex; flex-direction:column; gap:12px;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .card:hover{ transform: translateY(-3px); box-shadow: var(--shadow); border-color: rgba(106,227,255,.4);}
+    .meta{color:var(--muted); font-size:13px}
+    .btn{
+      align-self:flex-start; text-decoration:none; font-weight:700; padding:10px 14px; border-radius:12px;
+      border:1px solid var(--line); color:var(--ink); background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);
+      margin-top:6px;
+    }
+    code, pre{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;}
+    pre{
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      padding: 14px;
+      border-radius: 14px;
+      overflow:auto;
+      color: var(--ink);
+    }
+    footer{margin-top:36px; color:var(--muted); font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/Ethical-Hacking/index.html">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>Ethical Hacking</strong><br>
+          <span style="color:var(--muted); font-size:13px">Week 1 • OSINT & Recon</span>
+        </div>
+      </a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/Ethical-Hacking/index.html">Course</a>
+        <a href="/Ethical-Hacking/NCL/index.html">NCL Write-ups</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Week 1: OSINT & Recon</h1>
+      <p>
+        Build a repeatable recon workflow: define scope, collect passive intel, validate with light active checks,
+        and write notes that are usable during an exam or a CTF.
+      </p>
+    </section>
+
+    <h2 class="section-title">What I practiced</h2>
+    <section class="grid">
+      <article class="card">
+        <div class="meta">Notes</div>
+        <h3>Recon Workflow</h3>
+        <p>
+          A clean recon checklist you can re-use: scope → targets → passive intel → light active validation → reporting.
+        </p>
+        <pre>
+1) Define scope + goal
+2) Identify targets (domains, IP ranges, apps)
+3) Passive OSINT: DNS/WHOIS/subdomains/leaks
+4) Active validation: ping, traceroute, nmap (light)
+5) Summarize: attack surface + next steps</pre>
+      </article>
+
+      <article class="card">
+        <div class="meta">Lab habits</div>
+        <h3>How I write notes (fast + exam-friendly)</h3>
+        <p>
+          Every tool gets: purpose, command templates, “what good output looks like,” and 1–2 common mistakes.
+        </p>
+        <pre>
+Tool: nmap
+Goal:
+Command templates:
+Validation:
+Common pitfalls:
+What I learned:</pre>
+      </article>
+    </section>
+
+    <h2 class="section-title">Week 1 deliverables</h2>
+    <ul>
+      <li>One-page recon checklist (copy/paste friendly)</li>
+      <li>OSINT tool notes (DNS/WHOIS/subdomains basics)</li>
+      <li>Starter NCL workflow: “identify task type → choose tools → validate answer”</li>
+    </ul>
+
+    <p>
+      <a class="btn" href="/Ethical-Hacking/index.html">← Back to course home</a>
+    </p>
+
+    <footer>
+      <div>© <span id="y"></span> Clayton Holden • Built with GitHub Pages</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
