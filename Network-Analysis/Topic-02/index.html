@@ -1,1 +1,86 @@
-temp
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Network Analysis • Topic 2 • Clayton Holden</title>
+  <meta name="description" content="Filtering & Baseline Analysis (Week 3)." />
+  <link rel="icon" href="data:,">
+  <style>
+    :root{--bg:#0b0d10;--card:#11151b;--ink:#e8edf3;--muted:#a7b3c2;--accent:#6ae3ff;--line:#1f2630;--radius:18px;--shadow:0 10px 30px rgba(0,0,0,.35);}
+    @media (prefers-color-scheme: light){:root{--bg:#f6f8fb;--card:#ffffff;--ink:#0b1220;--muted:#475569;--accent:#0066ff;--line:#e5e9f0;}}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      background:radial-gradient(1200px 800px at 80% -10%,rgba(106,227,255,.12),transparent),
+      linear-gradient(180deg,rgba(255,255,255,.02),transparent 200px),var(--bg);color:var(--ink);}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 60px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+    .logo{width:42px;height:42px;border-radius:14px;background:
+      radial-gradient(14px 10px at 30% 30%,rgba(255,255,255,.3),transparent),
+      linear-gradient(135deg,var(--accent),#8ef7c2);box-shadow:var(--shadow);}
+    nav a{color:var(--muted);text-decoration:none;margin-left:14px;font-weight:600}
+    .hero{border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.03),transparent),var(--card);
+      border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);margin-bottom:18px;}
+    .hero h1{margin:0 0 8px;font-size:clamp(26px,4vw,40px);line-height:1.15}
+    .hero p{margin:0;color:var(--muted)}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+    .section-title{margin:24px 0 10px;color:var(--muted);font-weight:700;letter-spacing:.02em}
+    .card{border:1px solid var(--line);background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);}
+    .btn{display:inline-block;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:12px;border:1px solid var(--line);color:var(--ink);
+      background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);margin-top:10px;}
+    footer{margin-top:36px;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>Clayton Holden</strong><br>
+          <span style="color:var(--muted); font-size:13px">Cyber • Portfolio</span>
+        </div>
+      </a>
+      <nav>
+        <a href="/CYBR-2200_Network_Analysis/index.html">Course</a>
+        <a href="/">Home</a>
+        <a href="/#courses">Courses</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>Topic 2 — Filtering & Baseline Analysis</h1>
+      <p>
+        Week 3 focused on learning what “normal” looks like. I started with no filters, then applied display filters
+        to reduce noise, identify dominant hosts and protocols, and build a baseline across multiple captures.
+      </p>
+      <div class="chips">
+        <span class="chip">Display Filters</span>
+        <span class="chip">Protocol Hierarchy</span>
+        <span class="chip">Endpoints</span>
+        <span class="chip">Conversations</span>
+      </div>
+    </section>
+
+    <h2 class="section-title">Key Takeaway</h2>
+    <div class="card">
+      <p style="margin:0; color:var(--muted);">
+        The biggest lesson from this week was that baselining comes before “threat hunting.”
+        If you don’t understand normal behavior, everything looks suspicious. Filters let you isolate
+        the important traffic and justify observations with evidence.
+      </p>
+      <a class="btn" href="/CYBR-2200_Network_Analysis/index.html">Back to Course</a>
+    </div>
+
+    <footer>
+      <div>© <span id="y"></span> Clayton Holden • Built with GitHub Pages</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
