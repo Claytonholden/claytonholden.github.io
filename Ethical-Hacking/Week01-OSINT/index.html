@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Week 1 • OSINT & Recon • Ethical Hacking</title>
-  <meta name="description" content="Week 1 notes: OSINT & recon fundamentals + starter NCL practice workflow." />
+  <title>Topic 1 • Recon, Scanning & Vulnerability Analysis</title>
+  <meta name="description" content="OSINT, scanning, enumeration, and vulnerability research (CVE/CWE/NVD/CVSS)." />
   <link rel="icon" href="data:,">
   <style>
     :root{
@@ -33,10 +33,12 @@
     nav a{color:var(--muted); text-decoration:none; margin-left:14px; font-weight:600}
     .hero{
       border:1px solid var(--line); background:linear-gradient(180deg,rgba(255,255,255,.03),transparent), var(--card);
-      border-radius:18px; padding:28px; box-shadow: var(--shadow); margin-bottom:18px;
+      border-radius:var(--radius); padding:28px; box-shadow: var(--shadow); margin-bottom:18px;
     }
     .hero h1{margin:0 0 8px; font-size:clamp(26px,4vw,40px); line-height:1.15}
     .hero p{margin:0; color:var(--muted)}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+    .chip{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid var(--line); color:var(--muted)}
     .section-title{margin:24px 0 10px; color:var(--muted); font-weight:700; letter-spacing:.02em}
     .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
     @media (max-width:860px){ .grid{grid-template-columns:repeat(6,1fr)} }
@@ -44,17 +46,17 @@
     .card{
       grid-column: span 6;
       border:1px solid var(--line); background:var(--card);
-      border-radius:18px; padding:18px; display:flex; flex-direction:column; gap:12px;
+      border-radius:var(--radius); padding:18px; display:flex; flex-direction:column; gap:12px;
       transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
     .card:hover{ transform: translateY(-3px); box-shadow: var(--shadow); border-color: rgba(106,227,255,.4);}
     .meta{color:var(--muted); font-size:13px}
     .btn{
       align-self:flex-start; text-decoration:none; font-weight:700; padding:10px 14px; border-radius:12px;
-      border:1px solid var(--line); color:var(--ink); background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);
+      border:1px solid var(--line); color:var(--ink);
+      background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);
       margin-top:6px;
     }
-    code, pre{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;}
     pre{
       background: rgba(255,255,255,.03);
       border: 1px solid var(--line);
@@ -73,65 +75,93 @@
         <div class="logo" aria-hidden="true"></div>
         <div>
           <strong>Ethical Hacking</strong><br>
-          <span style="color:var(--muted); font-size:13px">Week 1 • OSINT & Recon</span>
+          <span style="color:var(--muted); font-size:13px">Topic 1 • Recon & Scanning</span>
         </div>
       </a>
       <nav>
         <a href="/">Home</a>
         <a href="/Ethical-Hacking/index.html">Course</a>
-        <a href="/Ethical-Hacking/NCL/index.html">NCL Write-ups</a>
+        <a href="/Ethical-Hacking/NCL/index.html">NCL</a>
       </nav>
     </header>
 
     <section class="hero">
-      <h1>Week 1: OSINT & Recon</h1>
+      <h1>Topic 1: Recon, Scanning & Vulnerability Analysis</h1>
       <p>
-        Build a repeatable recon workflow: define scope, collect passive intel, validate with light active checks,
-        and write notes that are usable during an exam or a CTF.
+        The practical workflow: map the attack surface, enumerate services accurately, then research vulnerabilities
+        and communicate risk clearly.
       </p>
+      <div class="chips">
+        <span class="chip">OSINT</span>
+        <span class="chip">Nmap</span>
+        <span class="chip">CVE/CWE/NVD</span>
+        <span class="chip">CVSS</span>
+      </div>
     </section>
 
-    <h2 class="section-title">What I practiced</h2>
-    <section class="grid">
-      <article class="card">
-        <div class="meta">Notes</div>
-        <h3>Recon Workflow</h3>
-        <p>
-          A clean recon checklist you can re-use: scope → targets → passive intel → light active validation → reporting.
-        </p>
-        <pre>
-1) Define scope + goal
-2) Identify targets (domains, IP ranges, apps)
-3) Passive OSINT: DNS/WHOIS/subdomains/leaks
-4) Active validation: ping, traceroute, nmap (light)
-5) Summarize: attack surface + next steps</pre>
-      </article>
-
-      <article class="card">
-        <div class="meta">Lab habits</div>
-        <h3>How I write notes (fast + exam-friendly)</h3>
-        <p>
-          Every tool gets: purpose, command templates, “what good output looks like,” and 1–2 common mistakes.
-        </p>
-        <pre>
-Tool: nmap
-Goal:
-Command templates:
-Validation:
-Common pitfalls:
-What I learned:</pre>
-      </article>
-    </section>
-
-    <h2 class="section-title">Week 1 deliverables</h2>
+    <h2 class="section-title">What I can do</h2>
     <ul>
-      <li>One-page recon checklist (copy/paste friendly)</li>
-      <li>OSINT tool notes (DNS/WHOIS/subdomains basics)</li>
-      <li>Starter NCL workflow: “identify task type → choose tools → validate answer”</li>
+      <li>Gather passive intel and validate it with light active checks.</li>
+      <li>Perform targeted Nmap scans (ports, service versions, scripts) and document findings.</li>
+      <li>Use CVE/CWE/NVD/CVSS sources to explain impact, affected versions, and mitigations.</li>
+      <li>Write notes that are usable by non-technical stakeholders (clear risk + recommendations).</li>
     </ul>
 
-    <p>
-      <a class="btn" href="/Ethical-Hacking/index.html">← Back to course home</a>
+    <h2 class="section-title">Portfolio Evidence</h2>
+    <section class="grid">
+      <article class="card">
+        <div class="meta">Workflow</div>
+        <h3>Recon → Scan → Validate → Report</h3>
+        <p>My repeatable checklist for new targets.</p>
+        <pre>
+1) Scope & rules of engagement
+2) Identify targets (domain/IP/app)
+3) Passive OSINT (DNS/WHOIS/subdomains)
+4) Active scan (nmap scan strategy)
+5) Enumerate services & versions (-sV, scripts)
+6) Map to CVE/CWE + CVSS severity
+7) Recommend mitigations + verification steps</pre>
+      </article>
+
+      <article class="card">
+        <div class="meta">Tooling</div>
+        <h3>Nmap “go-to” commands</h3>
+        <p>Templates I use depending on goals.</p>
+        <pre>
+# Fast top ports + versions
+nmap -sV --top-ports 1000 TARGET
+
+# Full TCP scan (slower)
+nmap -p- -sV TARGET
+
+# Common scripts
+nmap -sC -sV TARGET
+
+# Vuln research workflow (example)
+nmap -sV --script vulners TARGET</pre>
+      </article>
+
+      <article class="card">
+        <div class="meta">Research</div>
+        <h3>CVE / CWE / NVD / CVSS</h3>
+        <p>How I move from “finding” → “what it means.”</p>
+        <pre>
+CVE: specific vuln identifier
+CWE: weakness category (root cause pattern)
+NVD: enrichment database (impact + references + scoring)
+CVSS: severity scoring (base metrics + vector)</pre>
+      </article>
+
+      <article class="card">
+        <div class="meta">Practice</div>
+        <h3>NCL-style reconnaissance</h3>
+        <p>Where I apply this under time pressure.</p>
+        <a class="btn" href="/Ethical-Hacking/NCL/index.html">Open NCL write-ups</a>
+      </article>
+    </section>
+
+    <p style="margin-top:18px;">
+      <a class="btn" href="/Ethical-Hacking/index.html">← Back to Ethical Hacking</a>
     </p>
 
     <footer>
